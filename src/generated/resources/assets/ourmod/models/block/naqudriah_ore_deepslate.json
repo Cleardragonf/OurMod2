@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "ourmod:block/naqudriah_ore_deepslate"
+  }
+}

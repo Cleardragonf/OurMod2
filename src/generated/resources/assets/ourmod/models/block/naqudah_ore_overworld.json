@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "ourmod:block/naqudah_ore_overworld"
+  }
+}
