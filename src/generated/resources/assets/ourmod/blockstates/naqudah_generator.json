@@ -1,0 +1,119 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/main"
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff"
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "false"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleoff",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon"
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "powered": "true"
+      },
+      "apply": {
+        "model": "ourmod:block/naqudah_generator/singleon",
+        "x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

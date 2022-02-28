@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ourmod:naqudah_generator"
+    ]
+  },
+  "criteria": {
+    "naqudah": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ourmod:naqudah_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ourmod:naqudah_generator"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "naqudah",
+      "has_the_recipe"
+    ]
+  ]
+}
