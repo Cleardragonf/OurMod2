@@ -19,5 +19,7 @@ public class OurLanguageProvider extends LanguageProvider {
 
         add(Registration.NAQUDAH_ORE_OVERWORLD.get(), "Naqudah Ore");
         add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get(), "Naqudriah Ore");
+        add(Registration.RAW_NAQUDAH.get(), "Raw Naqudah");
+        add(Registration.NAQUDAH_INGOT.get(), "Naqudah Ingot");
     }
 }

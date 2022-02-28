@@ -19,6 +19,10 @@ public class OurItemTags extends ItemTagsProvider {
         tag(Tags.Items.ORES)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get())
                 .add(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get());
+        tag(Tags.Items.INGOTS)
+                .add(Registration.NAQUDAH_INGOT.get());
+
+
     }
 
     @Override

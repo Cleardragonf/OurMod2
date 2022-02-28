@@ -33,6 +33,11 @@ public class Registration {
     public static final RegistryObject<Block> NAQUDRIAH_ORE_DEEPSLATE = BLOCKS.register("naqudriah_ore_deepslate", () -> new Block(ORE_PROPERTIES));
     public static final RegistryObject<Item> NAQUDRIAH_ORE_DEEPSLATE_ITEM = fromBlock(NAQUDRIAH_ORE_DEEPSLATE);
 
+
+    public static final RegistryObject<Item> RAW_NAQUDAH = ITEMS.register("raw_naqudah", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> NAQUDAH_INGOT = ITEMS.register("naqudah_ingot", () -> new Item(ITEM_PROPERTIES));
+
+
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
     }
