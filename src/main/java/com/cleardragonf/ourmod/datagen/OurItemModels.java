@@ -19,6 +19,7 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudriah_ore_deepslate"));
 
         withExistingParent(Registration.NAQUDAH_GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_generator/main"));
+        withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));
 
         singleTexture(Registration.RAW_NAQUDAH.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),
