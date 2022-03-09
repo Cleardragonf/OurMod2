@@ -43,7 +43,7 @@ public class BatteryBlockEntity extends BlockEntity {
 
 
     //master Block Settings
-    public static boolean isMaster = true;
+    public boolean isMaster = true;
     public BlockPos masterCoords = this.worldPosition;
 
     public BlockPos getMaster(){
@@ -61,27 +61,36 @@ public class BatteryBlockEntity extends BlockEntity {
     }
 
     public void setMaster(BlockPos position){
+        isMaster = true;
+        masterCoords = position;
         if(level.getBlockState(position.above()).getBlock() instanceof BatteryBlock){
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.above());
             isMaster = false;
-            masterCoords = position.above();
+            masterCoords = block.masterCoords;
         }else if(level.getBlockState(position.below()).getBlock() instanceof BatteryBlock){
+
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.below());
             isMaster = false;
-            masterCoords = position.below();
+            masterCoords = block.masterCoords;
         }else if(level.getBlockState(position.west()).getBlock() instanceof BatteryBlock){
+
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.west());
             isMaster = false;
-            masterCoords = position.west();
+            masterCoords = block.masterCoords;
         }else if(level.getBlockState(position.east()).getBlock() instanceof BatteryBlock){
+
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.east());
             isMaster = false;
-            masterCoords = position.east();
+            masterCoords = block.masterCoords;
         }else if(level.getBlockState(position.north()).getBlock() instanceof BatteryBlock){
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.north());
             isMaster = false;
-            masterCoords = position.north();
+            masterCoords = block.masterCoords;
         }else if(level.getBlockState(position.south()).getBlock() instanceof BatteryBlock){
+
+            BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.south());
             isMaster = false;
-            masterCoords = position.south();
-        }else{
-            isMaster = true;
-            masterCoords = position;
+            masterCoords = block.masterCoords;
         }
     }
 
