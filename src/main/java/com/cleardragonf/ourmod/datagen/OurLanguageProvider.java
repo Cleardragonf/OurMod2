@@ -23,6 +23,7 @@ public class OurLanguageProvider extends LanguageProvider {
 
         add(Registration.NAQUDAH_GENERATOR_BLOCK.get(), "Naqudah Power Generator");
         add(Registration.DIGGER_BLOCK.get(), "Automated Mining");
+        add(Registration.BATTERY_BLOCK.get(), "MCM Battery");
 
         add(Registration.NAQUDAH_ORE_OVERWORLD.get(), "Naqudah Ore");
         add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get(), "Naqudriah Ore");

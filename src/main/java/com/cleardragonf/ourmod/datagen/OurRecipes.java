@@ -40,6 +40,15 @@ public class OurRecipes extends RecipeProvider {
                         .unlockedBy("digger", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
                         .group("ourmod")
                         .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.BATTERY_BLOCK.get())
+                .pattern("iii")
+                .pattern("ixi")
+                .pattern("iii")
+                .define('i', Registration.NAQUDAH_INGOT.get())
+                .define('x', Registration.RAW_NAQUDAH.get())
+                .unlockedBy("battery", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                .group("ourmod")
+                .save(consumer);
 
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get()),

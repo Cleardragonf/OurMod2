@@ -14,5 +14,6 @@ public class OurLootTables extends BaseLootTableProvider{
         lootTables.put(Registration.NAQUDAH_ORE_OVERWORLD.get(), createSilkTouchTable("naqudah_ore_overworld", Registration.NAQUDAH_ORE_OVERWORLD.get(), Registration.RAW_NAQUDAH.get(), 1,4));
         lootTables.put(Registration.NAQUDAH_GENERATOR_BLOCK.get(), createStandardTable("naqudah_generator", Registration.NAQUDAH_GENERATOR_BLOCK.get(), Registration.NAQUDAH_GENERATOR_BE.get()));
         lootTables.put(Registration.DIGGER_BLOCK.get(), createStandardTable("digger", Registration.DIGGER_BLOCK.get(), Registration.DIGGER_BLOCKENTITY.get()));
+        lootTables.put(Registration.DIGGER_BLOCK.get(), createStandardTable("battery", Registration.BATTERY_BLOCK.get(), Registration.BATTERY_BLOCKENTITY.get()));
     }
 }
