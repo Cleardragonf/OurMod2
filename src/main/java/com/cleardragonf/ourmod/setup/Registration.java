@@ -1,5 +1,8 @@
 package com.cleardragonf.ourmod.setup;
 
+import com.cleardragonf.ourmod.blocks.Battery.BatteryBlock;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryBlockEntity;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
@@ -51,17 +54,23 @@ public class Registration {
     public static final RegistryObject<Item> NAQUDAH_INGOT = ITEMS.register("naqudah_ingot", () -> new Item(ITEM_PROPERTIES));
 
 
-    //
+    //Naqudah Generator
     public static final RegistryObject<NaqudahGeneratorBlock> NAQUDAH_GENERATOR_BLOCK = BLOCKS.register("naqudah_generator", NaqudahGeneratorBlock::new);
     public static final RegistryObject<Item> NAQUDAH_GENERATOR_ITEM = fromBlock(NAQUDAH_GENERATOR_BLOCK);
     public static final RegistryObject<BlockEntityType<NaqudahGeneratorBlockEntity>> NAQUDAH_GENERATOR_BE = BLOCK_ENTITIES.register("naqudah_generator", () -> BlockEntityType.Builder.of(NaqudahGeneratorBlockEntity::new, NAQUDAH_GENERATOR_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<NaqudahGeneratorContainer>> NAQUDAH_GENERATOR_CONTAINER = CONTAINERS.register("naqudah_generator", () -> IForgeMenuType.create((windowId, inv, data) -> new NaqudahGeneratorContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
+    //MCM AutoDigger
     public static final RegistryObject<DiggerBlock> DIGGER_BLOCK = BLOCKS.register("digger", DiggerBlock::new);
     public static final RegistryObject<Item> DIGGER_ITEM = fromBlock(DIGGER_BLOCK);
     public static final RegistryObject<BlockEntityType<DiggerBlockEntity>> DIGGER_BLOCKENTITY = BLOCK_ENTITIES.register("digger", () -> BlockEntityType.Builder.of(DiggerBlockEntity::new, DIGGER_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<DiggerContainer>> DIGGER_CONTAINER = CONTAINERS.register("digger", () -> IForgeMenuType.create((windowId, inv, data) -> new DiggerContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
+    //MCM MultiBlock Battery
+    public static final RegistryObject<BatteryBlock> BATTERY_BLOCK = BLOCKS.register("battery", BatteryBlock::new);
+    public static final RegistryObject<Item> BATTERY_ITEM = fromBlock(BATTERY_BLOCK);
+    public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY_BLOCKENTITY = BLOCK_ENTITIES.register("battery", () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<BatteryContainer>> BATTERY_CONTAINER = CONTAINERS.register("battery", () -> IForgeMenuType.create((windowId, inv, data) -> new BatteryContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
