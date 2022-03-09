@@ -43,7 +43,6 @@ public class BatteryBlockEntity extends BlockEntity {
     public int x, y, z, tick;
     boolean initialized = false;
 
-
     //master Block Settings
     public boolean isMaster = true;
     public BlockPos masterCoords = this.worldPosition;
@@ -51,6 +50,10 @@ public class BatteryBlockEntity extends BlockEntity {
 
     public void addToList(BatteryBlockEntity block){
         wholeBattery.add(block);
+    }
+
+    public void removeToList(BatteryBlockEntity block){
+        wholeBattery.remove(block);
     }
 
 
@@ -198,8 +201,8 @@ public class BatteryBlockEntity extends BlockEntity {
     private final LazyOptional<IItemHandler> outputItemHandler = LazyOptional.of(() -> outputItems);
     private final LazyOptional<IItemHandler> combinedItemHandler = LazyOptional.of(this::createCombinedItemHandler);
 
-    private final CustomEnergyStorage energy = createEnergyStorage();
-    private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
+    public final CustomEnergyStorage energy = createEnergyStorage();
+    public final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
 
     public boolean isGenerating() {
         return generating;

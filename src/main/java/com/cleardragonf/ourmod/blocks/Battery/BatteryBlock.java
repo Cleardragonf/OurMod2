@@ -8,6 +8,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,7 +17,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -119,4 +123,18 @@ public class BatteryBlock extends Block implements EntityBlock {
         }
         return InteractionResult.SUCCESS;
     }
+
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
+        BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(pos);
+        BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.getMaster());
+        if(masterBlock.energy.getEnergyStored() > 0){
+            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (masterBlock.energy.getEnergyStored() /10000)),Explosion.BlockInteraction.BREAK);
+
+        }else{
+            masterBlock.removeToList(block);
+        }
+    }
+
+
 }
