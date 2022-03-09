@@ -37,9 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class BatteryBlockEntity extends BlockEntity {
-    private static final int ENERGY_CAPACITY = 50000;
-    private static final int ENERGY_RECEIVE = 200;
-    private static final int COLLECTING_DELAY = 5;
+
     public int x, y, z, tick;
     boolean initialized = false;
 
@@ -48,14 +46,18 @@ public class BatteryBlockEntity extends BlockEntity {
     public BlockPos masterCoords = this.worldPosition;
     public List<BatteryBlockEntity> wholeBattery = new ArrayList<>();
 
+    private int ENERGY_CAPACITY = 100000;
+    private int ENERGY_RECEIVE = 200;
+    private int COLLECTING_DELAY = 5;
+
     public void addToList(BatteryBlockEntity block){
         wholeBattery.add(block);
+
     }
 
     public void removeToList(BatteryBlockEntity block){
         wholeBattery.remove(block);
     }
-
 
     public BlockPos getMaster(){
         return masterCoords;
@@ -116,8 +118,12 @@ public class BatteryBlockEntity extends BlockEntity {
             masterCoords = block.masterCoords;
             BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
             masterBlock.addToList(this);
+        }else {
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(worldPosition);
+            masterBlock.addToList(this);
         }
     }
+
 
 
 
@@ -130,6 +136,10 @@ public class BatteryBlockEntity extends BlockEntity {
             if (y > 2)
                 execute();
             OurMod.LOGGER.log(Level.INFO, wholeBattery.size());
+            OurMod.LOGGER.log(Level.INFO, ENERGY_CAPACITY);
+            OurMod.LOGGER.log(Level.INFO, this.energy.getEnergyStored());
+            ENERGY_CAPACITY = 100000 * wholeBattery.size();
+            energy.setCapacity(ENERGY_CAPACITY);
         }
     }
 
@@ -201,8 +211,8 @@ public class BatteryBlockEntity extends BlockEntity {
     private final LazyOptional<IItemHandler> outputItemHandler = LazyOptional.of(() -> outputItems);
     private final LazyOptional<IItemHandler> combinedItemHandler = LazyOptional.of(this::createCombinedItemHandler);
 
-    public final CustomEnergyStorage energy = createEnergyStorage();
-    public final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
+    public CustomEnergyStorage energy = createEnergyStorage();
+    public LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
 
     public boolean isGenerating() {
         return generating;
@@ -285,6 +295,7 @@ public class BatteryBlockEntity extends BlockEntity {
             }
         };
     }
+
 
     // The getUpdateTag()/handleUpdateTag() pair is called whenever the client receives a new chunk
     // it hasn't seen before. i.e. the chunk is loaded

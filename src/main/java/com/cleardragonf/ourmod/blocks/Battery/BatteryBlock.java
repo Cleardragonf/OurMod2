@@ -113,7 +113,9 @@ public class BatteryBlock extends Block implements EntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                        return new BatteryContainer(windowId, pos, playerInventory, playerEntity);
+                        BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(pos);
+
+                        return new BatteryContainer(windowId, block.masterCoords, playerInventory, playerEntity);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());

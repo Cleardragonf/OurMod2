@@ -14,7 +14,15 @@ public class CustomEnergyStorage extends EnergyStorage {
 
     // Override this to (for example) call setChanged() on your block entity
     protected void onEnergyChanged() {
+
     }
+
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
+    }
+
+
+
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
