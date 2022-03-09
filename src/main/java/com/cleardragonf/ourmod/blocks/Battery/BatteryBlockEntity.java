@@ -46,8 +46,8 @@ public class BatteryBlockEntity extends BlockEntity {
     public BlockPos masterCoords = this.worldPosition;
     public List<BatteryBlockEntity> wholeBattery = new ArrayList<>();
 
-    private int ENERGY_CAPACITY = 100000;
-    private int ENERGY_RECEIVE = 200;
+    private int ENERGY_CAPACITY = 50000;
+    private int ENERGY_RECEIVE = 1000;
     private int COLLECTING_DELAY = 5;
 
     public void addToList(BatteryBlockEntity block){
@@ -156,36 +156,9 @@ public class BatteryBlockEntity extends BlockEntity {
     }
 
     private void execute() {
-        if(this.energy.getEnergyStored() >= 400){
-            this.energy.consumeEnergy(400);
-            int index = 0;
-            Block[] blocksRemoved = new Block[9];
-            for (int x = 0; x < 3; x++) {
-                for (int z = 0; z < 3; z++) {
-                    BlockPos posToBreak = new BlockPos(this.x + x, this.y, this.z + z);
-                    blocksRemoved[index] = this.level.getBlockState(posToBreak).getBlock();
-                    destroyBlock(posToBreak, true, null);
-                    index++;
-                }
-            }
-            this.y--;
-        }
-    }
-
-    private boolean destroyBlock(BlockPos pos, boolean dropBlock, @Nullable Entity entity) {
-        BlockState blockstate = level.getBlockState(pos);
-        if(blockstate.isAir())return false;
-        else {
-            FluidState ifluidstate = level.getFluidState(pos);
-            level.levelEvent(2001, pos, Block.getId(blockstate));
-            if(dropBlock) {
-                BlockEntity tileentity= blockstate.hasBlockEntity() ? level.getBlockEntity(pos) : null;
-                Block.dropResources(blockstate, level, this.worldPosition.offset(0, 1.5, 0), tileentity, entity, ItemStack.EMPTY);
-            }
-            return level.setBlock(pos, ifluidstate.getType().defaultFluidState().createLegacyBlock(), 3);
-        }
 
     }
+
 
     public static final int INPUT_SLOTS = 5;
     public static final int OUTPUT_SLOTS = 1;
