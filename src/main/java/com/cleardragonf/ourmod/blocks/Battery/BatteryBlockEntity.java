@@ -32,6 +32,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class BatteryBlockEntity extends BlockEntity {
@@ -45,6 +47,12 @@ public class BatteryBlockEntity extends BlockEntity {
     //master Block Settings
     public boolean isMaster = true;
     public BlockPos masterCoords = this.worldPosition;
+    public List<BatteryBlockEntity> wholeBattery = new ArrayList<>();
+
+    public void addToList(BatteryBlockEntity block){
+        wholeBattery.add(block);
+    }
+
 
     public BlockPos getMaster(){
         return masterCoords;
@@ -67,30 +75,44 @@ public class BatteryBlockEntity extends BlockEntity {
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.above());
             isMaster = false;
             masterCoords = block.masterCoords;
-        }else if(level.getBlockState(position.below()).getBlock() instanceof BatteryBlock){
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
+        }
+        else if(level.getBlockState(position.below()).getBlock() instanceof BatteryBlock){
 
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.below());
             isMaster = false;
             masterCoords = block.masterCoords;
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
+
         }else if(level.getBlockState(position.west()).getBlock() instanceof BatteryBlock){
 
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.west());
             isMaster = false;
             masterCoords = block.masterCoords;
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
         }else if(level.getBlockState(position.east()).getBlock() instanceof BatteryBlock){
 
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.east());
             isMaster = false;
             masterCoords = block.masterCoords;
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
         }else if(level.getBlockState(position.north()).getBlock() instanceof BatteryBlock){
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.north());
             isMaster = false;
             masterCoords = block.masterCoords;
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
         }else if(level.getBlockState(position.south()).getBlock() instanceof BatteryBlock){
 
             BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(position.south());
             isMaster = false;
             masterCoords = block.masterCoords;
+            BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.masterCoords);
+            masterBlock.addToList(this);
         }
     }
 
@@ -104,7 +126,7 @@ public class BatteryBlockEntity extends BlockEntity {
             tick = 0;
             if (y > 2)
                 execute();
-            OurMod.LOGGER.log(Level.INFO, masterCoords.toString());
+            OurMod.LOGGER.log(Level.INFO, wholeBattery.size());
         }
     }
 
