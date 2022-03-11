@@ -9,6 +9,9 @@ import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlock;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlockEntity;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -65,6 +68,12 @@ public class Registration {
     public static final RegistryObject<Item> DIGGER_ITEM = fromBlock(DIGGER_BLOCK);
     public static final RegistryObject<BlockEntityType<DiggerBlockEntity>> DIGGER_BLOCKENTITY = BLOCK_ENTITIES.register("digger", () -> BlockEntityType.Builder.of(DiggerBlockEntity::new, DIGGER_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<DiggerContainer>> DIGGER_CONTAINER = CONTAINERS.register("digger", () -> IForgeMenuType.create((windowId, inv, data) -> new DiggerContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    //MCM Translocator
+    public static final RegistryObject<TranslocatorBlock> TRANSLOCATOR_BLOCK = BLOCKS.register("translocator", TranslocatorBlock::new);
+    public static final RegistryObject<Item> TRANSLOCATOR_ITEM = fromBlock(TRANSLOCATOR_BLOCK);
+    public static final RegistryObject<BlockEntityType<TranslocatorBlockEntity>> TRANSLOCATOR_BLOCKENTITY = BLOCK_ENTITIES.register("translocator", () -> BlockEntityType.Builder.of(TranslocatorBlockEntity::new, TRANSLOCATOR_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<TranslocatorContainer>> TRANSLOCATOR_CONTAINER = CONTAINERS.register("translocator", () -> IForgeMenuType.create((windowId, inv, data) -> new TranslocatorContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
     //MCM MultiBlock Battery
     public static final RegistryObject<BatteryBlock> BATTERY_BLOCK = BLOCKS.register("battery", BatteryBlock::new);

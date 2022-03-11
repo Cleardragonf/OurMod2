@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ourmod",
+  "pattern": [
+    "iii",
+    "iii",
+    "ixi"
+  ],
+  "key": {
+    "i": {
+      "item": "ourmod:naqudah_ingot"
+    },
+    "x": {
+      "item": "ourmod:raw_naqudah"
+    }
+  },
+  "result": {
+    "item": "ourmod:translocator"
+  }
+}

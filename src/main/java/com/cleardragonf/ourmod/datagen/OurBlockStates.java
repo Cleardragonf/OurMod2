@@ -24,6 +24,7 @@ public class OurBlockStates extends BlockStateProvider {
         simpleBlock(Registration.NAQUDRIAH_ORE_DEEPSLATE.get());
         simpleBlock(Registration.DIGGER_BLOCK.get());
         simpleBlock(Registration.BATTERY_BLOCK.get());
+        simpleBlock(Registration.TRANSLOCATOR_BLOCK.get());
     }
 
     private void registerNaqudahGenerator(){

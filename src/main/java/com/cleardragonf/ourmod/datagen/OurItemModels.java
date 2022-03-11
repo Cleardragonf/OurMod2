@@ -21,6 +21,7 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.NAQUDAH_GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_generator/main"));
         withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));
         withExistingParent(Registration.BATTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/battery"));
+        withExistingParent(Registration.TRANSLOCATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/translocator"));
 
         singleTexture(Registration.RAW_NAQUDAH.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),

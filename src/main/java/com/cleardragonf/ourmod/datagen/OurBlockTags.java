@@ -21,13 +21,15 @@ public class OurBlockTags extends BlockTagsProvider {
                 .add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get())
                 .add(Registration.NAQUDAH_GENERATOR_BLOCK.get())
                 .add(Registration.DIGGER_BLOCK.get())
-                .add(Registration.BATTERY_BLOCK.get());
+                .add(Registration.BATTERY_BLOCK.get())
+                .add(Registration.TRANSLOCATOR_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD.get())
                 .add(Registration.NAQUDAH_GENERATOR_BLOCK.get())
                 .add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get())
                 .add(Registration.DIGGER_BLOCK.get())
-                .add(Registration.BATTERY_BLOCK.get());
+                .add(Registration.BATTERY_BLOCK.get())
+                .add(Registration.TRANSLOCATOR_BLOCK.get());
         tag(Tags.Blocks.ORES)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD.get())
                 .add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get());

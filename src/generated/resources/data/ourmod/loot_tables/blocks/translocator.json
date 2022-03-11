@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "digger",
+      "name": "translocator",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
@@ -36,7 +36,7 @@
             },
             {
               "function": "minecraft:set_contents",
-              "type": "ourmod:digger",
+              "type": "ourmod:translocator",
               "entries": [
                 {
                   "type": "minecraft:dynamic",
@@ -45,7 +45,7 @@
               ]
             }
           ],
-          "name": "ourmod:digger"
+          "name": "ourmod:translocator"
         }
       ]
     }
