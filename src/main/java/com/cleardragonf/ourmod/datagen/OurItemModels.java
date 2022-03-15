@@ -29,6 +29,8 @@ public class OurItemModels extends ItemModelProvider {
         singleTexture(Registration.NAQUDAH_INGOT.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),
                 "layer0",modLoc("item/naqudah_ingot"));
-
+        singleTexture(Registration.TRANSLOCATOR_TUNER.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/translocator_tuner"));
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 
@@ -55,6 +56,15 @@ public class OurRecipes extends RecipeProvider {
                 .pattern("ixi")
                 .define('i', Registration.NAQUDAH_INGOT.get())
                 .define('x', Registration.RAW_NAQUDAH.get())
+                .unlockedBy("translocator", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                .group("ourmod")
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.TRANSLOCATOR_TUNER.get())
+                .pattern("0i0")
+                .pattern("0ii")
+                .pattern("i00")
+                .define('i', Registration.NAQUDAH_INGOT.get())
+                .define('0', Items.AIR)
                 .unlockedBy("translocator", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
                 .group("ourmod")
                 .save(consumer);

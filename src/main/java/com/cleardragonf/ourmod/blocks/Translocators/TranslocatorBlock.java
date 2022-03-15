@@ -1,10 +1,12 @@
 package com.cleardragonf.ourmod.blocks.Translocators;
 
 import com.cleardragonf.ourmod.items.TranslocatorTuner;
+import com.cleardragonf.ourmod.setup.Registration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -99,10 +101,10 @@ public class TranslocatorBlock extends Block implements EntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof TranslocatorBlockEntity) {
-                if(player.getMainHandItem().getItem() instanceof TranslocatorTuner){
+                if(player.getMainHandItem().getItem().equals(Registration.TRANSLOCATOR_TUNER.get())){
                     ItemStack item = player.getMainHandItem();
                     CompoundTag tag;
                     if(item.hasTag()){
@@ -111,8 +113,11 @@ public class TranslocatorBlock extends Block implements EntityBlock {
                         tag = new CompoundTag();
                     }
                     if(tag.contains("energypos")){
-
-                    }else{
+                        TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
+                        player.sendMessage(text, player.getUUID());
+                        tag.remove("energypos");
+                    }
+                    else{
                         CompoundTag tagpos = new CompoundTag();
                         tagpos.putInt("x", be.getBlockPos().getX());
                         tagpos.putInt("y", be.getBlockPos().getY());

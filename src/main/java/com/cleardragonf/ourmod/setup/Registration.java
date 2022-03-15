@@ -55,6 +55,7 @@ public class Registration {
     //Stand alone ITEMS
     public static final RegistryObject<Item> RAW_NAQUDAH = ITEMS.register("raw_naqudah", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> NAQUDAH_INGOT = ITEMS.register("naqudah_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> TRANSLOCATOR_TUNER = ITEMS.register("translocator_tuner", () -> new Item(ITEM_PROPERTIES));
 
 
     //Naqudah Generator
