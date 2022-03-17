@@ -1,5 +1,6 @@
 package com.cleardragonf.ourmod.blocks.Translocators;
 
+import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.setup.Registration;
 import com.cleardragonf.ourmod.variables.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -69,21 +71,23 @@ public class TranslocatorBlockEntity extends BlockEntity{
         //Try Transporting Items and Energy to the Correlating Inputs
         if(energySendingOn) {
             if (!recievePowerBlocks.isEmpty()) {
-                sendOutPower();
+                //sendOutPower();
                 executeEnergySearch();
+                OurMod.LOGGER.log(Level.INFO, "Translocator Energy Level: " + energy.getEnergyStored());
+                OurMod.LOGGER.log(Level.INFO, "Translocator Recievables: " + this.recievePowerBlocks.size());
             }
         }
     }
 
 
     public void executeEnergySearch(){
-        if(powerBlocks!=null){
-            CompoundTag tag = (CompoundTag) powerBlocks;
-            BlockPos pos = new BlockPos(tag.getInt("x"), tag.getInt("y"), tag.getInt("z"));
-            TranslocatorBlockEntity target = (TranslocatorBlockEntity) level.getBlockEntity(pos);
-            if(target.energy.getEnergyStored() >0 && this.energy.getEnergyStored() < ENERGY_CAPACITY){
-                target.energy.extractEnergy(target.energy.getEnergyStored(),false);
-                saveWithFullMetadata();
+        for (BlockEntity be :
+                recievePowerBlocks) {
+            TranslocatorBlockEntity target = (TranslocatorBlockEntity) level.getBlockEntity(be.getBlockPos());
+            if(target.energy.getEnergyStored() >100 && this.energy.getEnergyStored() <= (ENERGY_CAPACITY-100)){
+                target.energy.consumeEnergy(100);
+                this.energy.addEnergy(100);
+                //target.energy.extractEnergy(target.energy.getEnergyStored(),false);
                 setChanged();
             }
         }

@@ -98,6 +98,8 @@ public class TranslocatorBlock extends Block implements EntityBlock {
         return super.getStateForPlacement(context).setValue(BlockStateProperties.POWERED, false);
     }
 
+
+
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
@@ -113,6 +115,10 @@ public class TranslocatorBlock extends Block implements EntityBlock {
                         tag = new CompoundTag();
                     }
                     if(tag.contains("energypos")){
+                        CompoundTag tagger = tag.getCompound("energypos");
+                        BlockPos blockPos = new BlockPos(tagger.getInt("x"), tagger.getInt("y"), tagger.getInt("z"));
+                        TranslocatorBlockEntity block = (TranslocatorBlockEntity)level.getBlockEntity(blockPos);
+                        block.recievePowerBlocks.add(block);
                         TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
                         player.sendMessage(text, player.getUUID());
                         tag.remove("energypos");

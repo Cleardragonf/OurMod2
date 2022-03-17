@@ -28,18 +28,20 @@ public class TranslocatorTuner extends Item {
         }else{
             tag = new CompoundTag();
         }
-
         Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos();
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if(blockEntity instanceof TranslocatorBlockEntity){
-            if(tag.contains("energypos")){
-                TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
-                context.getPlayer().sendMessage(text, context.getPlayer().getUUID());
-            }else{
-                TranslatableComponent text = new TranslatableComponent("Please select a Energy Source First");
-                context.getPlayer().sendMessage(text, context.getPlayer().getUUID());
+            if(level.isClientSide()){
+                if(tag.contains("energypos")){
+                    TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
+                    context.getPlayer().sendMessage(text, context.getPlayer().getUUID());
+                }else{
+                    TranslatableComponent text = new TranslatableComponent("Please select a Energy Source First");
+                    context.getPlayer().sendMessage(text, context.getPlayer().getUUID());
+                }
             }
+
             return InteractionResult.SUCCESS;
         }else{
             return InteractionResult.PASS;
