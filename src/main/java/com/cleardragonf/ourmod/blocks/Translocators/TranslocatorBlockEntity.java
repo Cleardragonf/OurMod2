@@ -18,6 +18,8 @@ import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.io.Console;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,7 +38,7 @@ public class TranslocatorBlockEntity extends BlockEntity{
     private  int ENERGY_RECEIVE = 200;
     public boolean energyRecieverOn = false;
     public boolean energySendingOn = true;
-    public List<BlockEntity> recievePowerBlocks = new ArrayList<>();
+    public List<TranslocatorBlockEntity> recievePowerBlocks = new ArrayList<>();
     public List<BlockEntity> powerSendingBlocks = new ArrayList<>();
     public CustomEnergyStorage energy = createEnergyStorage();
     public LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
@@ -81,15 +83,21 @@ public class TranslocatorBlockEntity extends BlockEntity{
 
 
     public void executeEnergySearch(){
-        for (BlockEntity be :
+        int index = 0;
+        for (TranslocatorBlockEntity be :
                 recievePowerBlocks) {
-            TranslocatorBlockEntity target = (TranslocatorBlockEntity) level.getBlockEntity(be.getBlockPos());
-            if(target.energy.getEnergyStored() >100 && this.energy.getEnergyStored() <= (ENERGY_CAPACITY-100)){
-                target.energy.consumeEnergy(100);
-                this.energy.addEnergy(100);
-                //target.energy.extractEnergy(target.energy.getEnergyStored(),false);
-                setChanged();
-            }
+            index =+ 1;
+                if (be != null) {
+                    if (be.energy.getEnergyStored() > 100 && this.energy.getEnergyStored() < ENERGY_CAPACITY) {
+                        int transfer = 100;
+                        be.energy.consumeEnergy(transfer);
+                        this.energy.addEnergy(transfer);
+                        //target.energy.extractEnergy(target.energy.getEnergyStored(),false);
+                        setChanged();
+                    }
+                } else {
+                    recievePowerBlocks.remove(index);
+                }
         }
     }
 
@@ -139,7 +147,49 @@ public class TranslocatorBlockEntity extends BlockEntity{
             return super.getCapability(cap, side);
         }
     }
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        saveClientData(tag);
+        //tag.put("Inventory", inputItems.serializeNBT());
+        tag.put("Energy", energy.serializeNBT());
+        CompoundTag infoTag = tag.getCompound("Info");
+        //infoTag.putInt("Generating", generatingCounter);
+    }
+    private void saveClientData(CompoundTag tag) {
+        CompoundTag infoTag = new CompoundTag();
+        tag.put("Info", infoTag);
+        //infoTag.putBoolean("generating", generating);
+        //infoTag.putBoolean("collecting", collecting);
+        //tag.putBoolean("actuallyGenerating", actuallyGenerating);
+        //if (generatingBlock != null) {
+        //    infoTag.put("block", NbtUtils.writeBlockState(generatingBlock));
+        //}
+    }
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        loadClientData(tag);
+        //if (tag.contains("Inventory")) {
+        //    inputItems.deserializeNBT(tag.getCompound("Inventory"));
+        //}
+        if (tag.contains("Energy")) {
+            energy.deserializeNBT(tag.get("Energy"));
+        }
+        //if (tag.contains("Info")) {
+        //    generatingCounter = tag.getCompound("Info").getInt("Generating");
+        //}
+    }
 
-
+    private void loadClientData(CompoundTag tag) {
+        if (tag.contains("Info")) {
+            CompoundTag infoTag = tag.getCompound("Info");
+            //generating = infoTag.getBoolean("generating");
+            //collecting = infoTag.getBoolean("collecting");
+            //if (infoTag.contains("block")) {
+            //    generatingBlock = NbtUtils.readBlockState(infoTag.getCompound("block"));
+            //}
+        }
+        //actuallyGenerating = tag.getBoolean("actuallyGenerating");
+    }
 
 }

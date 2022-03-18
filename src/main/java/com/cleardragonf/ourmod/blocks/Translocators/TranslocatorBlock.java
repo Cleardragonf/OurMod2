@@ -103,54 +103,55 @@ public class TranslocatorBlock extends Block implements EntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
-        if (!level.isClientSide()) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TranslocatorBlockEntity) {
-                if(player.getMainHandItem().getItem().equals(Registration.TRANSLOCATOR_TUNER.get())){
-                    ItemStack item = player.getMainHandItem();
-                    CompoundTag tag;
-                    if(item.hasTag()){
-                        tag = item.getTag();
+            if(!level.isClientSide()){
+                if (be instanceof TranslocatorBlockEntity) {
+                    if(player.getMainHandItem().getItem().equals(Registration.TRANSLOCATOR_TUNER.get())){
+                        ItemStack item = player.getMainHandItem();
+                        CompoundTag tag;
+                        if(item.hasTag()){
+                            tag = item.getTag();
+                        }else{
+                            tag = new CompoundTag();
+                        }
+                        if(tag.contains("energypos")){
+                            CompoundTag tagger = tag.getCompound("energypos");
+                            BlockPos blockPos = new BlockPos(tagger.getInt("x"), tagger.getInt("y"), tagger.getInt("z"));
+                            TranslocatorBlockEntity reciever = (TranslocatorBlockEntity)level.getBlockEntity(blockPos);
+                            TranslocatorBlockEntity sender = (TranslocatorBlockEntity)level.getBlockEntity(pos);
+                            sender.recievePowerBlocks.add(reciever);
+                            TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
+                            player.sendMessage(text, player.getUUID());
+                            item.removeTagKey("energypos");
+                        }
+                        else{
+                            CompoundTag tagpos = new CompoundTag();
+                            tagpos.putInt("x", be.getBlockPos().getX());
+                            tagpos.putInt("y", be.getBlockPos().getY());
+                            tagpos.putInt("z", be.getBlockPos().getZ());
+                            tag.put("energypos", tagpos);
+                            item.setTag(tag);
+                            return InteractionResult.SUCCESS;
+                        }
                     }else{
-                        tag = new CompoundTag();
-                    }
-                    if(tag.contains("energypos")){
-                        CompoundTag tagger = tag.getCompound("energypos");
-                        BlockPos blockPos = new BlockPos(tagger.getInt("x"), tagger.getInt("y"), tagger.getInt("z"));
-                        TranslocatorBlockEntity block = (TranslocatorBlockEntity)level.getBlockEntity(blockPos);
-                        block.recievePowerBlocks.add(block);
-                        TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
-                        player.sendMessage(text, player.getUUID());
-                        tag.remove("energypos");
-                    }
-                    else{
-                        CompoundTag tagpos = new CompoundTag();
-                        tagpos.putInt("x", be.getBlockPos().getX());
-                        tagpos.putInt("y", be.getBlockPos().getY());
-                        tagpos.putInt("z", be.getBlockPos().getZ());
-                        tag.put("energypos", tagpos);
-                        item.setTag(tag);
-                        return InteractionResult.SUCCESS;
-                    }
-                }else{
-                    MenuProvider containerProvider = new MenuProvider() {
-                        @Override
-                        public Component getDisplayName() {
-                            return new TranslatableComponent(SCREEN_TUTORIAL_POWERGEN);
-                        }
+                        MenuProvider containerProvider = new MenuProvider() {
+                            @Override
+                            public Component getDisplayName() {
+                                return new TranslatableComponent(SCREEN_TUTORIAL_POWERGEN);
+                            }
 
-                        @Override
-                        public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                            return new TranslocatorContainer(windowId, pos, playerInventory, playerEntity);
-                        }
-                    };
-                    NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
+                            @Override
+                            public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
+                                return new TranslocatorContainer(windowId, pos, playerInventory, playerEntity);
+                            }
+                        };
+                        NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
+                    }
+
+                } else {
+                    throw new IllegalStateException("Our named container provider is missing!");
                 }
-
-            } else {
-                throw new IllegalStateException("Our named container provider is missing!");
             }
-        }
         return InteractionResult.SUCCESS;
     }
 }
