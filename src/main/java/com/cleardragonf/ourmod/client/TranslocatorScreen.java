@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class TranslocatorScreen extends AbstractContainerScreen<TranslocatorContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(OurMod.MODID, "textures/gui/translocator.png");
+    private final ResourceLocation GUI = new ResourceLocation(OurMod.MODID, "textures/gui/translocator_tuner.png");
 
     public TranslocatorScreen(TranslocatorContainer container, Inventory inv, Component name){
         super(container, inv, name);

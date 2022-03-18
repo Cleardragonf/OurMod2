@@ -7,6 +7,7 @@
   "block.ourmod.translocator": "Translocator",
   "item.ourmod.naqudah_ingot": "Naqudah Ingot",
   "item.ourmod.raw_naqudah": "Raw Naqudah",
+  "item.ourmod.translocator_tuner": "Link Translocators together",
   "itemGroup.ourmod": "Our Mod",
   "message.powergen": "Power Generator generating %s per tick!",
   "screen.tutorial.powergen": "Naqudah Power Generator"

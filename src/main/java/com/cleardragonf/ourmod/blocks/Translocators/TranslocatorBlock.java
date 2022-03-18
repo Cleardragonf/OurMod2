@@ -120,7 +120,7 @@ public class TranslocatorBlock extends Block implements EntityBlock {
                             TranslocatorBlockEntity reciever = (TranslocatorBlockEntity)level.getBlockEntity(blockPos);
                             TranslocatorBlockEntity sender = (TranslocatorBlockEntity)level.getBlockEntity(pos);
                             sender.recievePowerBlocks.add(reciever);
-                            TranslatableComponent text = new TranslatableComponent("Connecting to: " + tag.get("energypos"));
+                            TranslatableComponent text = new TranslatableComponent("Recieving energy from: " + tag.get("energypos"));
                             player.sendMessage(text, player.getUUID());
                             item.removeTagKey("energypos");
                         }
@@ -130,6 +130,8 @@ public class TranslocatorBlock extends Block implements EntityBlock {
                             tagpos.putInt("y", be.getBlockPos().getY());
                             tagpos.putInt("z", be.getBlockPos().getZ());
                             tag.put("energypos", tagpos);
+                            TranslatableComponent text = new TranslatableComponent("Connected to: " + tag.get("energypos"));
+                            player.sendMessage(text, player.getUUID());
                             item.setTag(tag);
                             return InteractionResult.SUCCESS;
                         }
@@ -154,4 +156,6 @@ public class TranslocatorBlock extends Block implements EntityBlock {
             }
         return InteractionResult.SUCCESS;
     }
+
+
 }
