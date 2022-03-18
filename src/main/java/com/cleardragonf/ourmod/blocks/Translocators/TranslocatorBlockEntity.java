@@ -88,10 +88,16 @@ public class TranslocatorBlockEntity extends BlockEntity{
                 recievePowerBlocks) {
             index =+ 1;
                 if (be != null) {
-                    if (be.energy.getEnergyStored() > 100 && this.energy.getEnergyStored() < ENERGY_CAPACITY) {
+                    if (be.energy.getEnergyStored() > 0 && this.energy.getEnergyStored() < ENERGY_CAPACITY) {
                         int transfer = 100;
-                        be.energy.consumeEnergy(transfer);
-                        this.energy.addEnergy(transfer);
+                        if(be.energy.getEnergyStored() <= ENERGY_CAPACITY){
+                            transfer = be.energy.getEnergyStored();
+                            be.energy.consumeEnergy(transfer);
+                            this.energy.addEnergy(transfer);
+                        }else{
+                            be.energy.consumeEnergy(ENERGY_CAPACITY - this.energy.getEnergyStored());
+                            this.energy.setEnergy(ENERGY_CAPACITY);
+                        }
                         //target.energy.extractEnergy(target.energy.getEnergyStored(),false);
                         setChanged();
                     }
