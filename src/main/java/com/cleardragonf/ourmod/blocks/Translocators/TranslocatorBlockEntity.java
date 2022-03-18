@@ -75,8 +75,35 @@ public class TranslocatorBlockEntity extends BlockEntity{
             if (!recievePowerBlocks.isEmpty()) {
                 //sendOutPower();
                 executeEnergySearch();
+                Check4BlocksNeedingPower();
                 OurMod.LOGGER.log(Level.INFO, "Translocator Energy Level: " + energy.getEnergyStored());
                 OurMod.LOGGER.log(Level.INFO, "Translocator Recievables: " + this.recievePowerBlocks.size());
+            }
+        }
+    }
+
+    public void Check4BlocksNeedingPower(){
+        AtomicInteger capacity = new AtomicInteger(energy.getEnergyStored());
+        if (capacity.get() > 0) {
+            for (Direction direction : Direction.values()) {
+                BlockEntity be = level.getBlockEntity(worldPosition.relative(direction));
+                if (be != null) {
+                    boolean doContinue = be.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).map(handler -> {
+                                if (handler.canReceive()) {
+                                    int received = handler.receiveEnergy(Math.min(capacity.get(), 2000), false);
+                                    capacity.addAndGet(-received);
+                                    energy.consumeEnergy(received);
+                                    setChanged();
+                                    return capacity.get() > 0;
+                                } else {
+                                    return true;
+                                }
+                            }
+                    ).orElse(true);
+                    if (!doContinue) {
+                        return;
+                    }
+                }
             }
         }
     }
