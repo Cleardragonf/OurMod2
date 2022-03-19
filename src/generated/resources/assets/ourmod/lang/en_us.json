@@ -1,9 +1,13 @@
 {
+  "block.ourmod.battery": "MCM Battery",
+  "block.ourmod.digger": "Automated Mining",
   "block.ourmod.naqudah_generator": "Naqudah Power Generator",
   "block.ourmod.naqudah_ore_overworld": "Naqudah Ore",
   "block.ourmod.naqudriah_ore_deepslate": "Naqudriah Ore",
+  "block.ourmod.translocator": "Translocator",
   "item.ourmod.naqudah_ingot": "Naqudah Ingot",
   "item.ourmod.raw_naqudah": "Raw Naqudah",
+  "item.ourmod.translocator_tuner": "Link Translocators together",
   "itemGroup.ourmod": "Our Mod",
   "message.powergen": "Power Generator generating %s per tick!",
   "screen.tutorial.powergen": "Naqudah Power Generator"

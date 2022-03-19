@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ourmod",
+  "pattern": [
+    "iii",
+    "ixi",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/iron"
+    },
+    "x": {
+      "item": "ourmod:naqudah_ingot"
+    }
+  },
+  "result": {
+    "item": "ourmod:digger"
+  }
+}

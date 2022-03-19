@@ -3,6 +3,9 @@
   "values": [
     "ourmod:naqudah_ore_overworld",
     "ourmod:naqudriah_ore_deepslate",
-    "ourmod:naqudah_generator"
+    "ourmod:naqudah_generator",
+    "ourmod:digger",
+    "ourmod:battery",
+    "ourmod:translocator"
   ]
 }

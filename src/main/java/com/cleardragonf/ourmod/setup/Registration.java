@@ -1,8 +1,17 @@
 package com.cleardragonf.ourmod.setup;
 
+import com.cleardragonf.ourmod.blocks.Battery.BatteryBlock;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryBlockEntity;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
+import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
+import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
+import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlock;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlockEntity;
+import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -46,13 +55,33 @@ public class Registration {
     //Stand alone ITEMS
     public static final RegistryObject<Item> RAW_NAQUDAH = ITEMS.register("raw_naqudah", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> NAQUDAH_INGOT = ITEMS.register("naqudah_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> TRANSLOCATOR_TUNER = ITEMS.register("translocator_tuner", () -> new Item(ITEM_PROPERTIES));
 
 
-    //
+    //Naqudah Generator
     public static final RegistryObject<NaqudahGeneratorBlock> NAQUDAH_GENERATOR_BLOCK = BLOCKS.register("naqudah_generator", NaqudahGeneratorBlock::new);
     public static final RegistryObject<Item> NAQUDAH_GENERATOR_ITEM = fromBlock(NAQUDAH_GENERATOR_BLOCK);
     public static final RegistryObject<BlockEntityType<NaqudahGeneratorBlockEntity>> NAQUDAH_GENERATOR_BE = BLOCK_ENTITIES.register("naqudah_generator", () -> BlockEntityType.Builder.of(NaqudahGeneratorBlockEntity::new, NAQUDAH_GENERATOR_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<NaqudahGeneratorContainer>> NAQUDAH_GENERATOR_CONTAINER = CONTAINERS.register("naqudah_generator", () -> IForgeMenuType.create((windowId, inv, data) -> new NaqudahGeneratorContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    //MCM AutoDigger
+    public static final RegistryObject<DiggerBlock> DIGGER_BLOCK = BLOCKS.register("digger", DiggerBlock::new);
+    public static final RegistryObject<Item> DIGGER_ITEM = fromBlock(DIGGER_BLOCK);
+    public static final RegistryObject<BlockEntityType<DiggerBlockEntity>> DIGGER_BLOCKENTITY = BLOCK_ENTITIES.register("digger", () -> BlockEntityType.Builder.of(DiggerBlockEntity::new, DIGGER_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<DiggerContainer>> DIGGER_CONTAINER = CONTAINERS.register("digger", () -> IForgeMenuType.create((windowId, inv, data) -> new DiggerContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    //MCM Translocator
+    public static final RegistryObject<TranslocatorBlock> TRANSLOCATOR_BLOCK = BLOCKS.register("translocator", TranslocatorBlock::new);
+    public static final RegistryObject<Item> TRANSLOCATOR_ITEM = fromBlock(TRANSLOCATOR_BLOCK);
+    public static final RegistryObject<BlockEntityType<TranslocatorBlockEntity>> TRANSLOCATOR_BLOCKENTITY = BLOCK_ENTITIES.register("translocator", () -> BlockEntityType.Builder.of(TranslocatorBlockEntity::new, TRANSLOCATOR_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<TranslocatorContainer>> TRANSLOCATOR_CONTAINER = CONTAINERS.register("translocator", () -> IForgeMenuType.create((windowId, inv, data) -> new TranslocatorContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    //MCM MultiBlock Battery
+    public static final RegistryObject<BatteryBlock> BATTERY_BLOCK = BLOCKS.register("battery", BatteryBlock::new);
+    public static final RegistryObject<Item> BATTERY_ITEM = fromBlock(BATTERY_BLOCK);
+    public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY_BLOCKENTITY = BLOCK_ENTITIES.register("battery", () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<BatteryContainer>> BATTERY_CONTAINER = CONTAINERS.register("battery", () -> IForgeMenuType.create((windowId, inv, data) -> new BatteryContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));

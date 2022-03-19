@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 
@@ -31,6 +32,42 @@ public class OurRecipes extends RecipeProvider {
                         .group("ourmod")
                         .unlockedBy("naqudah", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
                         .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.DIGGER_BLOCK.get())
+                        .pattern("iii")
+                        .pattern("ixi")
+                        .pattern("iii")
+                        .define('i', Tags.Items.INGOTS_IRON)
+                        .define('x', Registration.NAQUDAH_INGOT.get())
+                        .unlockedBy("digger", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                        .group("ourmod")
+                        .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.BATTERY_BLOCK.get())
+                .pattern("iii")
+                .pattern("ixi")
+                .pattern("iii")
+                .define('i', Registration.NAQUDAH_INGOT.get())
+                .define('x', Registration.RAW_NAQUDAH.get())
+                .unlockedBy("battery", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                .group("ourmod")
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.TRANSLOCATOR_BLOCK.get())
+                .pattern("iii")
+                .pattern("iii")
+                .pattern("ixi")
+                .define('i', Registration.NAQUDAH_INGOT.get())
+                .define('x', Registration.RAW_NAQUDAH.get())
+                .unlockedBy("translocator", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                .group("ourmod")
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(Registration.TRANSLOCATOR_TUNER.get())
+                .pattern("0i0")
+                .pattern("0ii")
+                .pattern("i00")
+                .define('i', Registration.NAQUDAH_INGOT.get())
+                .define('0', Items.AIR)
+                .unlockedBy("translocator", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.NAQUDAH_INGOT.get()))
+                .group("ourmod")
+                .save(consumer);
 
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get()),

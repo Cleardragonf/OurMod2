@@ -19,6 +19,9 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudriah_ore_deepslate"));
 
         withExistingParent(Registration.NAQUDAH_GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_generator/main"));
+        withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));
+        withExistingParent(Registration.BATTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/battery"));
+        withExistingParent(Registration.TRANSLOCATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/translocator"));
 
         singleTexture(Registration.RAW_NAQUDAH.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),
@@ -26,6 +29,8 @@ public class OurItemModels extends ItemModelProvider {
         singleTexture(Registration.NAQUDAH_INGOT.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),
                 "layer0",modLoc("item/naqudah_ingot"));
-
+        singleTexture(Registration.TRANSLOCATOR_TUNER.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/translocator_tuner"));
     }
 }

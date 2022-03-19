@@ -1,6 +1,9 @@
 package com.cleardragonf.ourmod.setup;
 
+import com.cleardragonf.ourmod.client.BatteryScreen;
+import com.cleardragonf.ourmod.client.DiggerScreen;
 import com.cleardragonf.ourmod.client.NaqudahGeneratorScreen;
+import com.cleardragonf.ourmod.client.TranslocatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -11,6 +14,9 @@ public class ClientSetup {
         event.enqueueWork(() -> {
             MenuScreens.register(Registration.NAQUDAH_GENERATOR_CONTAINER.get(), NaqudahGeneratorScreen::new);
             ItemBlockRenderTypes.setRenderLayer(Registration.NAQUDAH_GENERATOR_BLOCK.get(), RenderType.translucent());
+            MenuScreens.register(Registration.DIGGER_CONTAINER.get(), DiggerScreen::new);
+            MenuScreens.register(Registration.BATTERY_CONTAINER.get(), BatteryScreen::new);
+            MenuScreens.register(Registration.TRANSLOCATOR_CONTAINER.get(), TranslocatorScreen::new);
         });
     }
 }
