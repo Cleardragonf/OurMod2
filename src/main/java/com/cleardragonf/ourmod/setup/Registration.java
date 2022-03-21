@@ -1,14 +1,19 @@
 package com.cleardragonf.ourmod.setup;
 
+import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -53,6 +58,9 @@ public class Registration {
     public static final RegistryObject<Item> NAQUDAH_GENERATOR_ITEM = fromBlock(NAQUDAH_GENERATOR_BLOCK);
     public static final RegistryObject<BlockEntityType<NaqudahGeneratorBlockEntity>> NAQUDAH_GENERATOR_BE = BLOCK_ENTITIES.register("naqudah_generator", () -> BlockEntityType.Builder.of(NaqudahGeneratorBlockEntity::new, NAQUDAH_GENERATOR_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<NaqudahGeneratorContainer>> NAQUDAH_GENERATOR_CONTAINER = CONTAINERS.register("naqudah_generator", () -> IForgeMenuType.create((windowId, inv, data) -> new NaqudahGeneratorContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    public static final ResourceLocation RL_MYSTERIOUS_DIMENSION_SET = new ResourceLocation(OurMod.MODID, "mysterious_dimension_structure_set");
+    public static final TagKey<StructureSet> MYSTERIOUS_DIMENSION_STRUCTURE_SET = TagKey.create(Registry.STRUCTURE_SET_REGISTRY, RL_MYSTERIOUS_DIMENSION_SET);
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));

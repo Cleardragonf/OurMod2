@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.datagen;
+package com.cleardragonf.ourmod.setup.datagen;
 
 import com.cleardragonf.ourmod.OurMod;
 import net.minecraft.data.DataGenerator;

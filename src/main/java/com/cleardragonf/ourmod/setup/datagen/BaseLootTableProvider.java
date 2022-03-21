@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.datagen;
+package com.cleardragonf.ourmod.setup.datagen;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

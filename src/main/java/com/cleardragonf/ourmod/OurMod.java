@@ -32,7 +32,8 @@ public class OurMod
 
     public OurMod(){
 
-        //Register the Class Registration which is our Deffered Registry
+        //Register the Class Registration which is our Deffered
+        ModSetup.setup();
         Registration.init();
 
         //Register the setupMethod for modloading
