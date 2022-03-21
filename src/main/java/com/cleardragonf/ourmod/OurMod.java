@@ -2,6 +2,7 @@ package com.cleardragonf.ourmod;
 
 import com.cleardragonf.ourmod.events.TranslocatorEvents;
 import com.cleardragonf.ourmod.setup.ClientSetup;
+import com.cleardragonf.ourmod.setup.Config;
 import com.cleardragonf.ourmod.setup.ModSetup;
 import com.cleardragonf.ourmod.setup.Registration;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,7 +24,9 @@ public class OurMod
     public OurMod(){
 
         //Register the Class Registration which is our Deffered Registry
+        ModSetup.setup();
         Registration.init();
+        Config.register();
 
         //Register the setupMethod for modloading
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();

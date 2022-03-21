@@ -1,17 +1,8 @@
 package com.cleardragonf.ourmod.setup;
 
-import com.cleardragonf.ourmod.blocks.Battery.BatteryBlock;
-import com.cleardragonf.ourmod.blocks.Battery.BatteryBlockEntity;
-import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
-import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
-import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
-import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
-import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlock;
-import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlockEntity;
-import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -86,5 +77,8 @@ public class Registration {
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
     }
+
+    public static final ResourceLocation RL_MYSTERIOUS_DIMENSION_SET = new ResourceLocation(OurMod.MODID, "mysterious_dimension_structure_set");
+    public static final TagKey<StructureSet> MYSTERIOUS_DIMENSION_STRUCTURE_SET = TagKey.create(Registry.STRUCTURE_SET_REGISTRY, RL_MYSTERIOUS_DIMENSION_SET);
 
 }
