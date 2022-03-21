@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.world.dimensions;
+package com.cleardragonf.ourmod.worldgen.dimensions;
 
 import com.cleardragonf.ourmod.setup.Registration;
 import com.mojang.serialization.Codec;
@@ -29,6 +29,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class MCMChunkGenerator extends ChunkGenerator {
+
     private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.INT.fieldOf("base").forGetter(Settings::baseHeight),

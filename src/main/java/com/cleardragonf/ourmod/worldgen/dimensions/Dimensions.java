@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.world.dimensions;
+package com.cleardragonf.ourmod.worldgen.dimensions;
 
 import com.cleardragonf.ourmod.OurMod;
 import net.minecraft.core.Registry;

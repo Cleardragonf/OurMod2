@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.world.ores;
+package com.cleardragonf.ourmod.worldgen.ores;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -13,6 +13,9 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import java.util.Random;
 import java.util.function.Predicate;
 
+/**
+ * A biome filter that also checks if the dimension is right
+ */
 public class DimensionBiomeFilter extends PlacementFilter {
 
     private final Predicate<ResourceKey<Level>> levelTest;
