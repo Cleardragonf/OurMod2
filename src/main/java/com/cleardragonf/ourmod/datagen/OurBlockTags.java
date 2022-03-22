@@ -22,7 +22,8 @@ public class OurBlockTags extends BlockTagsProvider {
                 .add(Registration.NAQUDAH_GENERATOR_BLOCK.get())
                 .add(Registration.DIGGER_BLOCK.get())
                 .add(Registration.BATTERY_BLOCK.get())
-                .add(Registration.TRANSLOCATOR_BLOCK.get());
+                .add(Registration.TRANSLOCATOR_BLOCK.get())
+                .add(Registration.STARGATE_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD.get())
                 .add(Registration.NAQUDAH_GENERATOR_BLOCK.get())

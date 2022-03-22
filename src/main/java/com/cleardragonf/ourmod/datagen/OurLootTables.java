@@ -16,5 +16,6 @@ public class OurLootTables extends BaseLootTableProvider{
         lootTables.put(Registration.DIGGER_BLOCK.get(), createStandardTable("digger", Registration.DIGGER_BLOCK.get(), Registration.DIGGER_BLOCKENTITY.get()));
         lootTables.put(Registration.BATTERY_BLOCK.get(), createStandardTable("battery", Registration.BATTERY_BLOCK.get(), Registration.BATTERY_BLOCKENTITY.get()));
         lootTables.put(Registration.TRANSLOCATOR_BLOCK.get(), createStandardTable("translocator", Registration.TRANSLOCATOR_BLOCK.get(), Registration.TRANSLOCATOR_BLOCKENTITY.get()));
+        lootTables.put(Registration.STARGATE_BLOCK.get(), createSimpleTable("stargate_block", Registration.STARGATE_BLOCK.get()));
     }
 }

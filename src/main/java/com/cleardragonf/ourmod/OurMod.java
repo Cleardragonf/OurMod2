@@ -5,6 +5,7 @@ import com.cleardragonf.ourmod.setup.ClientSetup;
 import com.cleardragonf.ourmod.setup.Config;
 import com.cleardragonf.ourmod.setup.ModSetup;
 import com.cleardragonf.ourmod.setup.Registration;
+import com.cleardragonf.ourmod.worldgen.dimensions.Dimensions;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;

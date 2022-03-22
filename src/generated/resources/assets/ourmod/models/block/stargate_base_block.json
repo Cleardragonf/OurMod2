@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "ourmod:block/stargate_base_block",
+    "up": "ourmod:block/stargate_base_block",
+    "north": "ourmod:block/stargate_base_block",
+    "south": "ourmod:block/stargate_base_block",
+    "east": "ourmod:block/stargate_base_block",
+    "west": "ourmod:block/stargate_base_block"
+  }
+}

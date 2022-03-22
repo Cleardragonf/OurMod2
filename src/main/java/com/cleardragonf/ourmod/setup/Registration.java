@@ -1,6 +1,7 @@
 package com.cleardragonf.ourmod.setup;
 
 import com.cleardragonf.ourmod.OurMod;
+import com.cleardragonf.ourmod.blocks.AstriaPorta.SGBaseBlock;
 import com.cleardragonf.ourmod.blocks.Battery.BatteryBlock;
 import com.cleardragonf.ourmod.blocks.Battery.BatteryBlockEntity;
 import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
@@ -87,6 +88,9 @@ public class Registration {
     public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY_BLOCKENTITY = BLOCK_ENTITIES.register("battery", () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<BatteryContainer>> BATTERY_CONTAINER = CONTAINERS.register("battery", () -> IForgeMenuType.create((windowId, inv, data) -> new BatteryContainer(windowId, data.readBlockPos(), inv, inv.player)));
 
+    //AstriaPorta Blocks
+    public static final RegistryObject<SGBaseBlock> STARGATE_BLOCK = BLOCKS.register("stargate_base_block", SGBaseBlock::new);
+    public static final RegistryObject<Item> STARGATE_ITEM = fromBlock(STARGATE_BLOCK);
 
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block){
         return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));

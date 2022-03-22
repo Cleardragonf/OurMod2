@@ -6,6 +6,7 @@
     "ourmod:naqudah_generator",
     "ourmod:digger",
     "ourmod:battery",
-    "ourmod:translocator"
+    "ourmod:translocator",
+    "ourmod:stargate_base_block"
   ]
 }

@@ -17,6 +17,7 @@ public class DataGenerators {
             OurBlockTags blockTags = new OurBlockTags(generator, event.getExistingFileHelper());
             generator.addProvider(blockTags);
             generator.addProvider(new OurItemTags(generator, blockTags, event.getExistingFileHelper()));
+            generator.addProvider(new OurBiomeTags(generator, event.getExistingFileHelper()));
         }
         if(event.includeClient()){
             generator.addProvider(new OurBlockStates(generator, event.getExistingFileHelper()));

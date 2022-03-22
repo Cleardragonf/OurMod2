@@ -17,37 +17,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SGDHDBlock extends Block {
-    // Our block is lower then a normal block. That causes the player to sink in it when he stands on the block
-    // And that in turn causes our 'entityInside' test to detect the player
-    private static final VoxelShape SHAPE = Shapes.box(0, 0, 0, 1, .8, 1);
+public class SGDHDBlock{
 
-    public SGDHDBlock() {
-        super(Properties.of(Material.METAL)
-                .sound(SoundType.METAL)
-                .strength(-1.0F, 3600000.0F)
-                .noDrops());
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
-
-    // This works because our block isn't a full block
-    @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (entity instanceof ServerPlayer player) {
-            if (level.dimension().equals(Dimensions.MYSTERIOUS)) {
-                teleportTo(player, pos.north(), Level.OVERWORLD);
-            } else {
-                teleportTo(player, pos.north(), Dimensions.MYSTERIOUS);
-            }
-        }
-    }
-
-    private void teleportTo(ServerPlayer player, BlockPos pos, ResourceKey<Level> id) {
-        ServerLevel world = player.getServer().getLevel(id);
-        CustomMethod.teleport(player, world, new BlockPos(pos.getX(), pos.getY(), pos.getZ()), true);
-    }
 }

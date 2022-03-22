@@ -24,6 +24,9 @@ public class OurLanguageProvider extends LanguageProvider {
         add(Registration.NAQUDAH_GENERATOR_BLOCK.get(), "Naqudah Power Generator");
         add(Registration.DIGGER_BLOCK.get(), "Automated Mining");
         add(Registration.BATTERY_BLOCK.get(), "MCM Battery");
+
+        add(Registration.STARGATE_BLOCK.get(), "Stargate Portal");
+
         add(Registration.TRANSLOCATOR_BLOCK.get(), "Translocator");
         add(Registration.TRANSLOCATOR_TUNER.get(), "Link Translocators together");
 

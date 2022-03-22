@@ -4,6 +4,7 @@ import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.setup.Registration;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -20,11 +21,19 @@ public class OurBlockStates extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels(){
         registerNaqudahGenerator();
+        registerStargate();
         simpleBlock(Registration.NAQUDAH_ORE_OVERWORLD.get());
         simpleBlock(Registration.NAQUDRIAH_ORE_DEEPSLATE.get());
         simpleBlock(Registration.DIGGER_BLOCK.get());
         simpleBlock(Registration.BATTERY_BLOCK.get());
         simpleBlock(Registration.TRANSLOCATOR_BLOCK.get());
+    }
+
+    private void registerStargate(){
+        Block block = Registration.STARGATE_BLOCK.get();
+        ResourceLocation side = modLoc("block/stargate_base_block");
+        ResourceLocation top = modLoc("block/stargate_base_block");
+        simpleBlock(block, models().cube(block.getRegistryName().getPath(), side, top, side, side, side, side));
     }
 
     private void registerNaqudahGenerator(){
