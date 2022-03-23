@@ -28,7 +28,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class MCMChunkGenerator extends ChunkGenerator {
+public class MultiDimensionalChunkGenerator extends ChunkGenerator {
 
     private static final Codec<Settings> SETTINGS_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -37,16 +37,16 @@ public class MCMChunkGenerator extends ChunkGenerator {
                     Codec.FLOAT.fieldOf("horizontalvariance").forGetter(Settings::horizontalVariance)
             ).apply(instance, Settings::new));
 
-    public static final Codec<MCMChunkGenerator> CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<MultiDimensionalChunkGenerator> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    RegistryOps.retrieveRegistry(Registry.STRUCTURE_SET_REGISTRY).forGetter(MCMChunkGenerator::getStructureSetRegistry),
-                    RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY).forGetter(MCMChunkGenerator::getBiomeRegistry),
-                    SETTINGS_CODEC.fieldOf("settings").forGetter(MCMChunkGenerator::getTutorialSettings)
-            ).apply(instance, MCMChunkGenerator::new));
+                    RegistryOps.retrieveRegistry(Registry.STRUCTURE_SET_REGISTRY).forGetter(MultiDimensionalChunkGenerator::getStructureSetRegistry),
+                    RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY).forGetter(MultiDimensionalChunkGenerator::getBiomeRegistry),
+                    SETTINGS_CODEC.fieldOf("settings").forGetter(MultiDimensionalChunkGenerator::getTutorialSettings)
+            ).apply(instance, MultiDimensionalChunkGenerator::new));
 
     private final Settings settings;
 
-    public MCMChunkGenerator(Registry<StructureSet> structureSetRegistry, Registry<Biome> registry, Settings settings) {
+    public MultiDimensionalChunkGenerator(Registry<StructureSet> structureSetRegistry, Registry<Biome> registry, Settings settings) {
         super(structureSetRegistry, getSet(structureSetRegistry), new MCMBiomeProvider(registry));
         this.settings = settings;
     }
@@ -72,13 +72,14 @@ public class MCMChunkGenerator extends ChunkGenerator {
     @Override
     public void buildSurface(WorldGenRegion region, StructureFeatureManager featureManager, ChunkAccess chunk) {
         BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
-        BlockState stone = Blocks.STONE.defaultBlockState();
+        BlockState sand = Blocks.SAND.defaultBlockState();
         ChunkPos chunkpos = chunk.getPos();
 
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
         int x;
         int z;
+        int y;
 
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
@@ -86,16 +87,10 @@ public class MCMChunkGenerator extends ChunkGenerator {
             }
         }
 
-        int baseHeight = settings.baseHeight();
-        float verticalVariance = settings.verticalVariance();
-        float horizontalVariance = settings.horizontalVariance();
-        for (x = 0; x < 16; x++) {
-            for (z = 0; z < 16; z++) {
-                int realx = chunkpos.x * 16 + x;
-                int realz = chunkpos.z * 16 + z;
-                int height = getHeightAt(baseHeight, verticalVariance, horizontalVariance, realx, realz);
-                for (int y = 1 ; y < height ; y++) {
-                    chunk.setBlockState(pos.set(x, y, z), stone, false);
+        for(y = 1; y < 50; y++){
+            for (x = 0; x < 16; x++) {
+                for (z = 0; z < 16; z++) {
+                    chunk.setBlockState(pos.set(x, y, z), sand, false);
                 }
             }
         }
@@ -114,7 +109,7 @@ public class MCMChunkGenerator extends ChunkGenerator {
 
     @Override
     public ChunkGenerator withSeed(long seed) {
-        return new MCMChunkGenerator(getStructureSetRegistry(), getBiomeRegistry(), settings);
+        return new MultiDimensionalChunkGenerator(getStructureSetRegistry(), getBiomeRegistry(), settings);
     }
 
     @Override

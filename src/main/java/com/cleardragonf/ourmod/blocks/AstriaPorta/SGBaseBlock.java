@@ -41,7 +41,9 @@ public class SGBaseBlock extends Block {
         if (entity instanceof ServerPlayer player) {
             if (level.dimension().equals(Dimensions.MYSTERIOUS)) {
                 teleportTo(player, pos.north(), Level.OVERWORLD);
-            } else {
+            } else if(level.dimension().equals(Level.OVERWORLD)){
+                teleportTo(player, pos.north(), Dimensions.ABIDOS);
+            }else if(level.dimension().equals(Dimensions.ABIDOS)){
                 teleportTo(player, pos.north(), Dimensions.MYSTERIOUS);
             }
         }
