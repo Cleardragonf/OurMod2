@@ -73,6 +73,7 @@ public class MultiDimensionalChunkGenerator extends ChunkGenerator {
     public void buildSurface(WorldGenRegion region, StructureFeatureManager featureManager, ChunkAccess chunk) {
         BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
         BlockState sand = Blocks.SAND.defaultBlockState();
+        BlockState stone = Blocks.STONE.defaultBlockState();
         ChunkPos chunkpos = chunk.getPos();
 
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -94,10 +95,34 @@ public class MultiDimensionalChunkGenerator extends ChunkGenerator {
                 }
             }
         }
+        if(getRandomNumber(1,50) == 1){
+            int baseHeight = settings.baseHeight();
+            float verticalVariance = settings.verticalVariance();
+            float horizontalVariance = settings.horizontalVariance();
+            for (x = 0; x < 16; x++) {
+                for (z = 0; z < 16; z++) {
+                    int realx = chunkpos.x * 8 + x;
+                    int realz = chunkpos.z * 8 + z;
+                    int height = getHeightAt(baseHeight, verticalVariance, horizontalVariance, realx, realz);
+                    for (y = 50 ; y <= height ; y++) {
+                        if(y >= (height-2)){
+                            chunk.setBlockState(pos.set(x, y, z), sand, false);
+                        }else{
+                            chunk.setBlockState(pos.set(x, y, z), stone, false);
+                        }
+
+                    }
+                }
+            }
+        }
+
 
 
     }
 
+    private int getRandomNumber(int min, int max){
+        return (int) ((Math.random() * (max - min)) + min);
+    }
     private int getHeightAt(int baseHeight, float verticalVariance, float horizontalVariance, int x, int z) {
         return (int) (baseHeight + Math.sin(x / horizontalVariance) * verticalVariance + Math.cos(z / horizontalVariance) * verticalVariance);
     }
