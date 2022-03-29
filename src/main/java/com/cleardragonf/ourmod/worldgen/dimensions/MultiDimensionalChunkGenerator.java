@@ -68,7 +68,7 @@ public class MultiDimensionalChunkGenerator extends ChunkGenerator {
     public Registry<StructureSet> getStructureSetRegistry() {
         return structureSets;
     }
-
+    public static int randomChunk = 1;
     @Override
     public void buildSurface(WorldGenRegion region, StructureFeatureManager featureManager, ChunkAccess chunk) {
         BlockState bedrock = Blocks.BEDROCK.defaultBlockState();
@@ -95,26 +95,29 @@ public class MultiDimensionalChunkGenerator extends ChunkGenerator {
                 }
             }
         }
-        if(getRandomNumber(1,50) == 1){
-            int baseHeight = settings.baseHeight();
-            float verticalVariance = settings.verticalVariance();
-            float horizontalVariance = settings.horizontalVariance();
-            for (x = 0; x < 16; x++) {
-                for (z = 0; z < 16; z++) {
-                    int realx = chunkpos.x * 8 + x;
-                    int realz = chunkpos.z * 8 + z;
-                    int height = getHeightAt(baseHeight, verticalVariance, horizontalVariance, realx, realz);
-                    for (y = 50 ; y <= height ; y++) {
-                        if(y >= (height-2)){
-                            chunk.setBlockState(pos.set(x, y, z), sand, false);
-                        }else{
-                            chunk.setBlockState(pos.set(x, y, z), stone, false);
-                        }
-
+        if(randomChunk >= 25){
+            randomChunk = 1;
+        }
+        int baseHeight = settings.baseHeight() / randomChunk;
+        float verticalVariance = settings.verticalVariance();
+        float horizontalVariance = settings.horizontalVariance();
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
+                int realx = chunkpos.x * 16 + x;
+                int realz = chunkpos.z * 16 + z;
+                int height = getHeightAt(baseHeight, verticalVariance, horizontalVariance, realx, realz);
+                for (y = 50 ; y <= height ; y++) {
+                    if(y >= (height-2)){
+                        chunk.setBlockState(pos.set(x, y, z), sand, false);
+                    }else{
+                        chunk.setBlockState(pos.set(x, y, z), stone, false);
                     }
+
                 }
             }
         }
+        randomChunk++;
+
 
 
 
