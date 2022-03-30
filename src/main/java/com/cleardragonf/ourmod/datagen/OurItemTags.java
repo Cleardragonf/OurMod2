@@ -29,7 +29,15 @@ public class OurItemTags extends ItemTagsProvider {
                 .add(Registration.PHOSPHATE_ORE_DEEPSLATE_ITEM.get())
                 .add(Registration.SALT_ORE_OVERWORLD_ITEM.get());
         tag(Tags.Items.INGOTS)
-                .add(Registration.NAQUDAH_INGOT.get());
+                .add(Registration.NAQUDAH_INGOT.get())
+                .add(Registration.COBALT_INGOT.get())
+                .add(Registration.PLATINUM_INGOT.get())
+                .add(Registration.SILVER_INGOT.get())
+                .add(Registration.ALUMINIUM_INGOT.get())
+                .add(Registration.MAGNESIUM_INGOT.get())
+                .add(Registration.NICKEL_INGOT.get())
+                .add(Registration.ZINC_INGOT.get())
+                .add(Registration.PHOSPHATE_INGOT.get());
 
 
     }
