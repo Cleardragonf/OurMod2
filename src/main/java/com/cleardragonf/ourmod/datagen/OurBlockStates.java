@@ -24,6 +24,15 @@ public class OurBlockStates extends BlockStateProvider {
         registerStargate();
         simpleBlock(Registration.NAQUDAH_ORE_OVERWORLD.get());
         simpleBlock(Registration.NAQUDRIAH_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.COBALT_ORE_OVERWORLD.get());
+        simpleBlock(Registration.PLATINUM_ORE_OVERWORLD.get());
+        simpleBlock(Registration.SILVER_ORE_OVERWORLD.get());
+        simpleBlock(Registration.ALUMINIUM_ORE_OVERWORLD.get());
+        simpleBlock(Registration.MAGNESIUM_ORE_OVERWORLD.get());
+        simpleBlock(Registration.NICKEL_ORE_OVERWORLD.get());
+        simpleBlock(Registration.ZINC_ORE_OVERWORLD.get());
+        simpleBlock(Registration.PHOSPHATE_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.SALT_ORE_OVERWORLD.get());
         simpleBlock(Registration.DIGGER_BLOCK.get());
         simpleBlock(Registration.BATTERY_BLOCK.get());
         simpleBlock(Registration.TRANSLOCATOR_BLOCK.get());

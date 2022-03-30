@@ -34,5 +34,31 @@ public class OurLanguageProvider extends LanguageProvider {
         add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get(), "Naqudriah Ore");
         add(Registration.RAW_NAQUDAH.get(), "Raw Naqudah");
         add(Registration.NAQUDAH_INGOT.get(), "Naqudah Ingot");
+        add(Registration.COBALT_ORE_OVERWORLD.get(), "Cobalt Ore");
+        add(Registration.RAW_COBALT.get(), "Raw Cobalt");
+        add(Registration.COBALT_INGOT.get(), "Cobalt Ingot");
+        add(Registration.PLATINUM_ORE_OVERWORLD.get(), "Platinum Ore");
+        add(Registration.RAW_PLATINUM.get(), "Raw Platinum");
+        add(Registration.PLATINUM_INGOT.get(), "Platinum Ingot");
+        add(Registration.SILVER_ORE_OVERWORLD.get(), "Silver Ore");
+        add(Registration.RAW_SILVER.get(), "Raw Silver");
+        add(Registration.SILVER_INGOT.get(), "Silver Ingot");
+        add(Registration.ALUMINIUM_ORE_OVERWORLD.get(), "Aluminium Ore");
+        add(Registration.RAW_ALUMINIUM.get(), "Raw Aluminium");
+        add(Registration.ALUMINIUM_INGOT.get(), "Aluminium Ingot");
+        add(Registration.MAGNESIUM_ORE_OVERWORLD.get(), "Magnesium Ore");
+        add(Registration.RAW_MAGNESIUM.get(), "Raw Magnesium");
+        add(Registration.MAGNESIUM_INGOT.get(), "Magnesium Ingot");
+        add(Registration.NICKEL_ORE_OVERWORLD.get(), "Nickel Ore");
+        add(Registration.RAW_NICKEL.get(), "Raw Nickel");
+        add(Registration.NICKEL_INGOT.get(), "Nickel Ingot");
+        add(Registration.ZINC_ORE_OVERWORLD.get(), "Zinc Ore");
+        add(Registration.RAW_ZINC.get(), "Raw Zinc");
+        add(Registration.ZINC_INGOT.get(), "Zinc Ingot");
+        add(Registration.PHOSPHATE_ORE_DEEPSLATE.get(), "Phospate Ore");
+        add(Registration.RAW_PHOSPHATE.get(), "Raw Phosphate");
+        add(Registration.PHOSPHATE_INGOT.get(), "Phosphate Ingot");
+
+
     }
 }

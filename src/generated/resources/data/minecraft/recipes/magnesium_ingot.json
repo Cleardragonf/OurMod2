@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ourmod:raw_magnesium"
+  },
+  "result": "ourmod:magnesium_ingot",
+  "experience": 0.0,
+  "cookingtime": 100
+}

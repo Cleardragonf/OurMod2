@@ -17,6 +17,16 @@ public class OurItemModels extends ItemModelProvider {
     protected void registerModels(){
         withExistingParent(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_ore_overworld"));
         withExistingParent(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudriah_ore_deepslate"));
+        withExistingParent(Registration.COBALT_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/cobalt_ore_overworld"));
+        withExistingParent(Registration.PLATINUM_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/platinum_ore_overworld"));
+        withExistingParent(Registration.SILVER_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/silver_ore_overworld"));
+        withExistingParent(Registration.ALUMINIUM_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/aluminium_ore_overworld"));
+        withExistingParent(Registration.MAGNESIUM_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/magnesium_ore_overworld"));
+        withExistingParent(Registration.NICKEL_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/nickel_ore_overworld"));
+        withExistingParent(Registration.ZINC_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/zinc_ore_overworld"));
+        withExistingParent(Registration.PHOSPHATE_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/phosphate_ore_overworld"));
+        withExistingParent(Registration.SALT_ORE_OVERWORLD_ITEM.get().getRegistryName().getPath(), modLoc("block/salt_ore_overworld"));
+
 
         withExistingParent(Registration.NAQUDAH_GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_generator/main"));
         withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));

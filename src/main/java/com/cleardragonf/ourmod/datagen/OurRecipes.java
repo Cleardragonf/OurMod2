@@ -75,8 +75,40 @@ public class OurRecipes extends RecipeProvider {
                 .unlockedBy("has_ore", has(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get()))
                 .save(consumer, "naqudah_ingot1");
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_NAQUDAH.get()),
-                Registration.NAQUDAH_INGOT.get(), 0.0f, 100)
+                        Registration.NAQUDAH_INGOT.get(), 0.0f, 100)
                 .unlockedBy("has_chunk", has(Registration.RAW_NAQUDAH.get()))
                 .save(consumer, "naqudah_ingot2");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_COBALT.get()),
+                        Registration.COBALT_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_COBALT.get()))
+                .save(consumer, "cobalt_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_PLATINUM.get()),
+                        Registration.PLATINUM_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_PLATINUM.get()))
+                .save(consumer, "platinum_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_SILVER.get()),
+                        Registration.SILVER_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_SILVER.get()))
+                .save(consumer, "silver_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_ALUMINIUM.get()),
+                        Registration.ALUMINIUM_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_ALUMINIUM.get()))
+                .save(consumer, "aluminium_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_MAGNESIUM.get()),
+                        Registration.MAGNESIUM_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_MAGNESIUM.get()))
+                .save(consumer, "magnesium_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_NICKEL.get()),
+                        Registration.NICKEL_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_NICKEL.get()))
+                .save(consumer, "nickel_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_ZINC.get()),
+                        Registration.ZINC_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_ZINC.get()))
+                .save(consumer, "zinc_ingot");
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Registration.RAW_PHOSPHATE.get()),
+                        Registration.PHOSPHATE_INGOT.get(), 0.0f, 100)
+                .unlockedBy("has_chunk", has(Registration.RAW_PHOSPHATE.get()))
+                .save(consumer, "phosphate_ingot");
     }
 }

@@ -11,16 +11,19 @@ import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
+import com.cleardragonf.ourmod.blocks.Ore.CustomOre;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlock;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlockEntity;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorContainer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
@@ -53,10 +56,50 @@ public class Registration {
     public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(ModSetup.ITEM_GROUP);
 
     //Blocks and BlockITEMS
-    public static final RegistryObject<Block> NAQUDAH_ORE_OVERWORLD = BLOCKS.register("naqudah_ore_overworld", () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> NAQUDAH_ORE_OVERWORLD = BLOCKS.register("naqudah_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
     public static final RegistryObject<Item> NAQUDAH_ORE_OVERWORLD_ITEM = fromBlock(NAQUDAH_ORE_OVERWORLD);
-    public static final RegistryObject<Block> NAQUDRIAH_ORE_DEEPSLATE = BLOCKS.register("naqudriah_ore_deepslate", () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> NAQUDRIAH_ORE_DEEPSLATE = BLOCKS.register("naqudriah_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
     public static final RegistryObject<Item> NAQUDRIAH_ORE_DEEPSLATE_ITEM = fromBlock(NAQUDRIAH_ORE_DEEPSLATE);
+
+
+    //("coal_ore", new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(BREAKTIME, EXPLOSIVE_RESISTANCE), UniformInt.of(0, 2)));
+    //Ores Blocks
+    public static final RegistryObject<Block> COBALT_ORE_OVERWORLD = BLOCKS.register("cobalt_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> COBALT_ORE_OVERWORLD_ITEM = fromBlock(COBALT_ORE_OVERWORLD);
+    public static final RegistryObject<Block> PLATINUM_ORE_OVERWORLD = BLOCKS.register("platinum_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> PLATINUM_ORE_OVERWORLD_ITEM = fromBlock(PLATINUM_ORE_OVERWORLD);
+    public static final RegistryObject<Block> SILVER_ORE_OVERWORLD = BLOCKS.register("silver_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> SILVER_ORE_OVERWORLD_ITEM = fromBlock(SILVER_ORE_OVERWORLD);
+    public static final RegistryObject<Block> ALUMINIUM_ORE_OVERWORLD = BLOCKS.register("aluminium_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> ALUMINIUM_ORE_OVERWORLD_ITEM = fromBlock(ALUMINIUM_ORE_OVERWORLD);
+    public static final RegistryObject<Block> MAGNESIUM_ORE_OVERWORLD = BLOCKS.register("magnesium_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> MAGNESIUM_ORE_OVERWORLD_ITEM = fromBlock(MAGNESIUM_ORE_OVERWORLD);
+    public static final RegistryObject<Block> NICKEL_ORE_OVERWORLD = BLOCKS.register("nickel_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> NICKEL_ORE_OVERWORLD_ITEM = fromBlock(NICKEL_ORE_OVERWORLD);
+    public static final RegistryObject<Block> ZINC_ORE_OVERWORLD = BLOCKS.register("zinc_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> ZINC_ORE_OVERWORLD_ITEM = fromBlock(ZINC_ORE_OVERWORLD);
+    public static final RegistryObject<Block> PHOSPHATE_ORE_DEEPSLATE = BLOCKS.register("phosphate_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> PHOSPHATE_ORE_DEEPSLATE_ITEM = fromBlock(PHOSPHATE_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> SALT_ORE_OVERWORLD = BLOCKS.register("salt_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> SALT_ORE_OVERWORLD_ITEM = fromBlock(SALT_ORE_OVERWORLD);
+    //Ore Items
+    public static final RegistryObject<Item> RAW_COBALT = ITEMS.register("raw_cobalt", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_PLATINUM = ITEMS.register("raw_platinum", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_SILVER = ITEMS.register("raw_silver", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_ALUMINIUM = ITEMS.register("raw_aluminium", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_MAGNESIUM = ITEMS.register("raw_magnesium", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_NICKEL = ITEMS.register("raw_nickel", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_ZINC = ITEMS.register("raw_zinc", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> RAW_PHOSPHATE = ITEMS.register("raw_phosphate", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> COBALT_INGOT = ITEMS.register("cobalt_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> PLATINUM_INGOT = ITEMS.register("platinum_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> SILVER_INGOT = ITEMS.register("silver_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> ALUMINIUM_INGOT = ITEMS.register("aluminium_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> MAGNESIUM_INGOT = ITEMS.register("magnesium_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> PHOSPHATE_INGOT = ITEMS.register("phosphate_ingot", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(ITEM_PROPERTIES));
 
     //Stand alone ITEMS
     public static final RegistryObject<Item> RAW_NAQUDAH = ITEMS.register("raw_naqudah", () -> new Item(ITEM_PROPERTIES));
