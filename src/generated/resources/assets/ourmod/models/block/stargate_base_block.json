@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
+    "particle": "ourmod:block/stargate_base_block",
     "down": "ourmod:block/stargate_base_block",
     "up": "ourmod:block/stargate_base_block",
     "north": "ourmod:block/stargate_base_block",
