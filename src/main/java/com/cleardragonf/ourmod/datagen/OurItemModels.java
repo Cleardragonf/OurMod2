@@ -3,7 +3,6 @@ package com.cleardragonf.ourmod.datagen;
 import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.setup.Registration;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -21,6 +20,8 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.NAQUDAH_GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/naqudah_generator/main"));
         withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));
         withExistingParent(Registration.BATTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/battery"));
+        withExistingParent(Registration.SMELTERY_CONTROLLER_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery_controller"));
+        withExistingParent(Registration.SMELTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery"));
         withExistingParent(Registration.TRANSLOCATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/translocator"));
 
         singleTexture(Registration.RAW_NAQUDAH.get().getRegistryName().getPath(),

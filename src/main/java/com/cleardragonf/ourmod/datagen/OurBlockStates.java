@@ -27,6 +27,8 @@ public class OurBlockStates extends BlockStateProvider {
         simpleBlock(Registration.DIGGER_BLOCK.get());
         simpleBlock(Registration.BATTERY_BLOCK.get());
         simpleBlock(Registration.TRANSLOCATOR_BLOCK.get());
+        simpleBlock(Registration.SMELTERY_CONTROLLER_BLOCK.get());
+        simpleBlock(Registration.SMELTERY_BLOCK.get());
     }
 
     private void registerStargate(){

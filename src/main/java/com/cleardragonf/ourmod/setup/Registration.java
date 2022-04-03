@@ -8,6 +8,9 @@ import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerContainer;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmeltryControllerBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
@@ -87,6 +90,14 @@ public class Registration {
     public static final RegistryObject<Item> BATTERY_ITEM = fromBlock(BATTERY_BLOCK);
     public static final RegistryObject<BlockEntityType<BatteryBlockEntity>> BATTERY_BLOCKENTITY = BLOCK_ENTITIES.register("battery", () -> BlockEntityType.Builder.of(BatteryBlockEntity::new, BATTERY_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<BatteryContainer>> BATTERY_CONTAINER = CONTAINERS.register("battery", () -> IForgeMenuType.create((windowId, inv, data) -> new BatteryContainer(windowId, data.readBlockPos(), inv, inv.player)));
+
+    //MCM MultiBlock SMELTERY
+    public static final RegistryObject<SmeltryControllerBlock> SMELTERY_CONTROLLER_BLOCK = BLOCKS.register("smeltery_controller", SmeltryControllerBlock::new);
+    public static final RegistryObject<Item> SMELTERY_CONTROLLER_ITEM = fromBlock(SMELTERY_CONTROLLER_BLOCK);
+    public static final RegistryObject<BlockEntityType<SmelteryControllerBlockEntity>> SMELTERY_CONTROLLER_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_controller", () -> BlockEntityType.Builder.of(SmelteryControllerBlockEntity::new, SMELTERY_CONTROLLER_BLOCK.get()).build(null));
+    public static final RegistryObject<MenuType<SmelteryControllerContainer>> SMELTERY_CONTAINER = CONTAINERS.register("smeltery_controller", () -> IForgeMenuType.create((windowId, inv, data) -> new SmelteryControllerContainer(windowId, data.readBlockPos(), inv, inv.player)));
+    public static final RegistryObject<SmeltryControllerBlock> SMELTERY_BLOCK = BLOCKS.register("smeltery", SmeltryControllerBlock::new);
+    public static final RegistryObject<Item> SMELTERY_ITEM = fromBlock(SMELTERY_BLOCK);
 
     //AstriaPorta Blocks
     public static final RegistryObject<SGBaseBlock> STARGATE_BLOCK = BLOCKS.register("stargate_base_block", SGBaseBlock::new);
