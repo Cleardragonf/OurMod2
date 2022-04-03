@@ -130,13 +130,22 @@ public class BatteryBlock extends Block implements EntityBlock {
     public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
         BatteryBlockEntity block = (BatteryBlockEntity) level.getBlockEntity(pos);
         BatteryBlockEntity masterBlock = (BatteryBlockEntity) level.getBlockEntity(block.getMaster());
-        if(masterBlock.energy.getEnergyStored() > 0){
-            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (masterBlock.energy.getEnergyStored() /10000)),Explosion.BlockInteraction.BREAK);
 
-        }else{
+
+        if(block.isMaster) {
+            if (masterBlock.energy.getEnergyStored() > 0) {
+                for (BatteryBlockEntity be :
+                        masterBlock.wholeBattery) {
+                    level.destroyBlock(be.getBlockPos(), true);
+                }
+                level.explode(p_49855_, pos.getX(), pos.getY(), pos.getZ(), (1.0f * (masterBlock.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+            }else{
+                for(BatteryBlockEntity be: masterBlock.wholeBattery){
+                    level.destroyBlock(be.getBlockPos(), true);
+                }
+            }
+        }else {
             masterBlock.removeToList(block);
         }
     }
-
-
 }
