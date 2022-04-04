@@ -2,13 +2,12 @@ package com.cleardragonf.ourmod.setup;
 
 import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.blocks.AstriaPorta.SGBaseBlock;
-import com.cleardragonf.ourmod.blocks.Battery.BatteryBlock;
-import com.cleardragonf.ourmod.blocks.Battery.BatteryBlockEntity;
-import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
+import com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery.BatteryBlock;
+import com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery.BatteryBlockEntity;
+import com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericSmelteryBlock;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerContainer;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmeltryControllerBlock;
