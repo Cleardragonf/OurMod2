@@ -1,4 +1,4 @@
-package com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery;
+package com.cleardragonf.ourmod.blocks.Battery;
 
 
 import com.cleardragonf.ourmod.setup.Registration;

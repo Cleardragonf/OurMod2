@@ -1,18 +1,21 @@
-package com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery;
+package com.cleardragonf.ourmod.blocks.Battery;
 
 import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.setup.Registration;
 import com.cleardragonf.ourmod.variables.CustomEnergyStorage;
+import com.mojang.math.Vector3d;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.common.Tags;

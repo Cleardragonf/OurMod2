@@ -28,8 +28,9 @@ public class SmelteryControllerContainer extends AbstractContainerMenu {
         blockEntity = player.getCommandSenderWorld().getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-
+        addSlotBox(this.playerInventory,9,10,15,3,18,5,18);
         addSlotRange(this.playerInventory, 0, 10, 172, 9, 18);
+
         trackPower();
     }
 
@@ -76,6 +77,13 @@ public class SmelteryControllerContainer extends AbstractContainerMenu {
         return stillValid(ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos()), playerEntity, Registration.SMELTERY_CONTROLLER_BLOCK.get());
     }
 
+    private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+        for (int j = 0 ; j < verAmount ; j++) {
+            index = addSlotRange(handler, index, x, y, horAmount, dx);
+            y += dy;
+        }
+        return index;
+    }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
         for (int i = 0 ; i < amount ; i++) {

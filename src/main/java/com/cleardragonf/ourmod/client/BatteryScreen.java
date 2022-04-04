@@ -1,7 +1,7 @@
 package com.cleardragonf.ourmod.client;
 
 import com.cleardragonf.ourmod.OurMod;
-import com.cleardragonf.ourmod.blocks.NaqudahGenerator.Battery.BatteryContainer;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
