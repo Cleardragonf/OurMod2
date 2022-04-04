@@ -21,7 +21,7 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.DIGGER_ITEM.get().getRegistryName().getPath(), modLoc("block/digger"));
         withExistingParent(Registration.BATTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/battery"));
         withExistingParent(Registration.SMELTERY_CONTROLLER_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery_controller"));
-        withExistingParent(Registration.SMELTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery"));
+        //withExistingParent(Registration.SMELTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery"));
         withExistingParent(Registration.TRANSLOCATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/translocator"));
 
         singleTexture(Registration.RAW_NAQUDAH.get().getRegistryName().getPath(),

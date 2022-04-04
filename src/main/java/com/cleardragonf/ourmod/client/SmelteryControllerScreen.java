@@ -10,11 +10,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SmelteryScreen extends AbstractContainerScreen<SmelteryControllerContainer> {
+public class SmelteryControllerScreen extends AbstractContainerScreen<SmelteryControllerContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(OurMod.MODID, "textures/gui/smeltery.png");
+    private final ResourceLocation GUI = new ResourceLocation(OurMod.MODID, "textures/gui/smeltery_controller.png");
 
-    public SmelteryScreen(SmelteryControllerContainer container, Inventory inv, Component name){
+    public SmelteryControllerScreen(SmelteryControllerContainer container, Inventory inv, Component name){
         super(container, inv, name);
     }
 
@@ -35,6 +35,6 @@ public class SmelteryScreen extends AbstractContainerScreen<SmelteryControllerCo
         RenderSystem.setShaderTexture(0,GUI);
         int relX = (this.width - this.imageWidth) /2;
         int relY = (this.height - this.imageHeight) /2;
-        this.blit(matrixStack, relX, relY, 0,0,this.imageWidth, this.imageHeight);
+        this.blit(matrixStack, relX, relY, 0,0,180,195);
     }
 }
