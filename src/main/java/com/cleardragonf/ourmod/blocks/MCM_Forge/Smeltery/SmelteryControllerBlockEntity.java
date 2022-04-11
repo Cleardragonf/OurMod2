@@ -9,7 +9,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,6 +39,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SmelteryControllerBlockEntity extends BlockEntity {
 
@@ -42,6 +51,15 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public boolean isMaster = true;
     public BlockPos masterCoords = this.worldPosition;
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
+
+    //public list or Resources
+
+    RecipeManager recipe = new RecipeManager();
+    public List<CraftingRecipe> recipes = recipe.getAllRecipesFor(RecipeType.CRAFTING)
+            .stream()
+            .filter(r -> r.getIngredients().contains(Items.IRON_INGOT))
+            .collect(Collectors.toList());
+    //public Stream<CraftingRecipe> ironRecipes = recipe.getAllRecipesFor(RecipeType.CRAFTING).stream().filter(item -> recipes.contains(Items.IRON_INGOT));
 
     private int ENERGY_CAPACITY = 50000;
     private int ENERGY_RECEIVE = 1000;
@@ -132,11 +150,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
             tick = 0;
             if (y > 2)
                 execute();
-            OurMod.LOGGER.log(Level.INFO, wholeSmeltery.size());
-            OurMod.LOGGER.log(Level.INFO, ENERGY_CAPACITY);
-            OurMod.LOGGER.log(Level.INFO, this.energy.getEnergyStored());
-            ENERGY_CAPACITY = 100000 * wholeSmeltery.size();
-            energy.setCapacity(ENERGY_CAPACITY);
         }
     }
 
@@ -153,11 +166,33 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     }
 
     private void execute() {
+        //if there's enough energy go through Melting (eventually making this number lower possibly)
+        if(energy.getEnergyStored() > 500){
+            melt();
+        }
+    }
+    
+    private void melt(){
+        //loops through all Inventory slots available in the Smeltery Controllers GUI
+        for (int i = 0; i < 26; i++) {
+            //find the slots that are not empty and then 'melt them down piece by peice'
 
+            if(!inputItems.getStackInSlot(i).isEmpty()){
+                //do check here for items...if it's iron melt it down
+                if(recipes.contains(inputItems.getStackInSlot(i).getItem())){
+
+                    inputItems.getStackInSlot(i).setCount(inputItems.getStackInSlot(i).getCount() - 1);
+                }
+                //leave it
+                else{
+
+                }
+            }
+        }
     }
 
 
-    public static final int INPUT_SLOTS = 5;
+    public static final int INPUT_SLOTS = 26;
     public static final int OUTPUT_SLOTS = 1;
 
     // The actual values for these properties
@@ -183,36 +218,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
     public CustomEnergyStorage energy = createEnergyStorage();
     public LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
-
-    public boolean isGenerating() {
-        return generating;
-    }
-
-    public void setGenerating(boolean generating) {
-        this.generating = generating;
-        setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-    }
-
-    public boolean isCollecting() {
-        return collecting;
-    }
-
-    public void setCollecting(boolean collecting) {
-        this.collecting = collecting;
-        setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-    }
-
-    public void setGeneratingBlock(BlockState generatingBlock) {
-        // Only accept ores by checking the tag
-        if (generatingBlock.is(Tags.Blocks.ORES)) {
-            this.generatingBlock = generatingBlock;
-            setChanged();
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-        }
-    }
-
 
     @Nonnull
     private ItemStackHandler createInputItemHandler() {
