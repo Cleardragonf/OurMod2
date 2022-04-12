@@ -19,16 +19,16 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class SmelteryControllerContainer extends AbstractContainerMenu {
-    private BlockEntity blockEntity;
+    private SmelteryControllerBlockEntity blockEntity;
     private Player playerEntity;
     private IItemHandler playerInventory;
 
     public SmelteryControllerContainer(int windowId, BlockPos pos, Inventory playerInventory, Player player) {
         super(Registration.SMELTERY_CONTAINER.get(), windowId);
-        blockEntity = player.getCommandSenderWorld().getBlockEntity(pos);
+        blockEntity = (SmelteryControllerBlockEntity) player.getCommandSenderWorld().getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        addSlotBox(this.playerInventory,9,10,15,3,18,5,18);
+        addSlotBox(blockEntity.inputItems,9,10,15,3,18,5,18);
         addSlotRange(this.playerInventory, 0, 10, 172, 9, 18);
 
         trackPower();

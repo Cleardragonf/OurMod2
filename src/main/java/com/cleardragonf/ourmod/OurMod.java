@@ -22,6 +22,7 @@ public class OurMod
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "ourmod";
 
+
     public OurMod(){
 
         //Register the Class Registration which is our Deffered Registry
@@ -35,5 +36,6 @@ public class OurMod
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> modbus.addListener(ClientSetup::init));
         IEventBus modbus2 = MinecraftForge.EVENT_BUS;
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->modbus2.addListener(TranslocatorEvents::onUse));
+        modbus2.addListener(ModSetup::recipeInit);
     }
 }

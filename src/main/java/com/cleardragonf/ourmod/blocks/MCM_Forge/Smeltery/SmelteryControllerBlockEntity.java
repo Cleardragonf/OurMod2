@@ -42,6 +42,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.cleardragonf.ourmod.setup.ModSetup.ironRecipes;
+
+
 public class SmelteryControllerBlockEntity extends BlockEntity {
 
     public int x, y, z, tick;
@@ -53,12 +56,14 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
 
     //public list or Resources
-
+/*
     RecipeManager recipe = new RecipeManager();
     public List<CraftingRecipe> recipes = recipe.getAllRecipesFor(RecipeType.CRAFTING)
             .stream()
             .filter(r -> r.getIngredients().contains(Items.IRON_INGOT))
             .collect(Collectors.toList());
+
+ */
     //public Stream<CraftingRecipe> ironRecipes = recipe.getAllRecipesFor(RecipeType.CRAFTING).stream().filter(item -> recipes.contains(Items.IRON_INGOT));
 
     private int ENERGY_CAPACITY = 50000;
@@ -179,9 +184,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
             if(!inputItems.getStackInSlot(i).isEmpty()){
                 //do check here for items...if it's iron melt it down
-                if(recipes.contains(inputItems.getStackInSlot(i).getItem())){
+                if(ironRecipes.contains(inputItems.getStackInSlot(i))){
 
-                    inputItems.getStackInSlot(i).setCount(inputItems.getStackInSlot(i).getCount() - 1);
+                    inputItems.extractItem(i,1,false);
                 }
                 //leave it
                 else{
@@ -210,7 +215,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
     // A direct reference to our items and energy for easy access inside our block entity
     // LazyOptionals to return with getCapability()
-    private final ItemStackHandler inputItems = createInputItemHandler();
+    public final ItemStackHandler inputItems = createInputItemHandler();
     private final LazyOptional<IItemHandler> inputItemHandler = LazyOptional.of(() -> inputItems);
     private final ItemStackHandler outputItems = createOutputItemHandler();
     private final LazyOptional<IItemHandler> outputItemHandler = LazyOptional.of(() -> outputItems);
