@@ -1,6 +1,8 @@
 package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery;
 
 import com.cleardragonf.ourmod.OurMod;
+import com.cleardragonf.ourmod.datagen.OurBlockTags;
+import com.cleardragonf.ourmod.datagen.OurItemTags;
 import com.cleardragonf.ourmod.setup.Registration;
 import com.cleardragonf.ourmod.variables.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
@@ -9,14 +11,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,10 +33,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.cleardragonf.ourmod.setup.ModSetup.*;
 
@@ -56,8 +51,11 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
 
     //public list or Resources
-
-
+    public int MAX_TANK_AMOUNT = 100;
+    public int ironAmount = 0;
+    public int goldAmount = 0;
+    public int diamondAmount = 0;
+    public int meltingCost = 500;
 
     private int ENERGY_CAPACITY = 50000;
     private int ENERGY_RECEIVE = 1000;
@@ -132,9 +130,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
         }
     }
 
-
-
-
     public void tickServer() {
         if (!initialized)
             init();
@@ -160,8 +155,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
     private void execute() {
         //if there's enough energy go through Melting (eventually making this number lower possibly)
-        if(energy.getEnergyStored() > 500){
+        if(energy.getEnergyStored() > meltingCost){
             melt();
+            OurMod.LOGGER.log(Level.INFO, "Iron: " + ironAmount + ", Gold: " + goldAmount + ", Diamond: " + diamondAmount);
         }
     }
     
@@ -174,16 +170,34 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
                 //do check here for items...if it's iron melt it down
                 ItemStack stack = inputItems.getStackInSlot(i);
                 if(ironRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    convertToMB(inputItems.getStackInSlot(i), "iron");
                     stack.setCount(stack.getCount() - 1);
+                    energy.consumeEnergy(meltingCost);
                     setChanged();
                 }
                 //leave it
                 else if(goldRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    convertToMB(inputItems.getStackInSlot(i), "gold");
                     stack.setCount(stack.getCount() - 1);
+                    energy.consumeEnergy(meltingCost);
                     setChanged();
                 }
                 else if(diamondRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    convertToMB(inputItems.getStackInSlot(i), "diamond");
                     stack.setCount(stack.getCount() - 1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }
+                else if(inputItems.getStackInSlot(i).is(Tags.Items.ORES)){
+                    convertToMB(inputItems.getStackInSlot(i), "ores");
+                    stack.setCount(stack.getCount() - 1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }
+                else if(inputItems.getStackInSlot(i).is(Tags.Items.INGOTS)){
+                    convertToMB(inputItems.getStackInSlot(i), "ingot");
+                    stack.setCount(stack.getCount() - 1);
+                    energy.consumeEnergy(meltingCost);
                     setChanged();
                 }
                 else{
@@ -191,7 +205,54 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
                 }
             }
         }
-        energy.consumeEnergy(500);
+    }
+
+    private void convertToMB(ItemStack stackInSlot, String iron) {
+        switch (iron){
+            case "iron":
+                if(stackInSlot.is(Items.IRON_NUGGET)){
+                    ironAmount += 2;
+                }else{
+                    ironAmount += 36;
+                }
+                break;
+            case "gold":
+                if(stackInSlot.is(Items.GOLD_NUGGET)){
+                    goldAmount += 2;
+                }else{
+                    goldAmount += 36;
+                }
+                break;
+            case "diamond":
+                if(stackInSlot.is(Items.DIAMOND)){
+                    diamondAmount += 18;
+                }else{
+                    diamondAmount += 36;
+                }
+                break;
+            case "ores":
+                if(stackInSlot.is(Items.IRON_ORE)){
+                    ironAmount += 162;
+                }else if(stackInSlot.is(Items.GOLD_ORE)){
+                    goldAmount += 162;
+                }else if(stackInSlot.is(Items.DIAMOND_ORE)){
+                    diamondAmount += 162;
+                }else{
+
+                }
+                break;
+            case "ingot":
+                if(stackInSlot.is(Items.IRON_INGOT)){
+                    ironAmount += 18;
+                }else if(stackInSlot.is(Items.GOLD_INGOT)){
+                    goldAmount += 18;
+                }else{
+
+                }
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -233,7 +294,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
             @NotNull
             @Override
             public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                return ItemStack.EMPTY;
+                return super.extractItem(slot, amount, simulate);
             }
         };
     }
