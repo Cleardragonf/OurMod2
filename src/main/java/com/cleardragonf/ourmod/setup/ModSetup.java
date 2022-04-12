@@ -36,11 +36,11 @@ public class ModSetup {
         //bus.addListener(EventPriority.NORMAL, Structures::addDi);
     }
 
-    public static List<CraftingRecipe> ironRecipes;
-    public static List<CraftingRecipe> goldRecipes;
-    public static List<CraftingRecipe> diamondRecipes;
+    public static List<Item> ironRecipes;
+    public static List<Item> goldRecipes;
+    public static List<Item> diamondRecipes;
 
-    public static List<CraftingRecipe> getRecipesWithItem(RecipeManager manager, Item item)
+    public static List<Item> getRecipesWithItem(RecipeManager manager, Item item)
     {
         ItemStack testStack = new ItemStack(item);
         return manager.getAllRecipesFor(RecipeType.CRAFTING)
@@ -48,7 +48,9 @@ public class ModSetup {
                 .filter(recipe -> recipe.getIngredients()
                         .stream()
                         .anyMatch(ing -> ing.test(testStack))
-                )
+
+                ).map(Recipe::getResultItem)
+                .map(ItemStack::getItem)
                 .toList();
     }
     public static void recipeInit(OnDatapackSyncEvent event){

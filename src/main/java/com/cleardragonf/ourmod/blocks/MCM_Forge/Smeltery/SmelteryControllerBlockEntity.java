@@ -42,7 +42,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.cleardragonf.ourmod.setup.ModSetup.ironRecipes;
+import static com.cleardragonf.ourmod.setup.ModSetup.*;
 
 
 public class SmelteryControllerBlockEntity extends BlockEntity {
@@ -56,15 +56,8 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
 
     //public list or Resources
-/*
-    RecipeManager recipe = new RecipeManager();
-    public List<CraftingRecipe> recipes = recipe.getAllRecipesFor(RecipeType.CRAFTING)
-            .stream()
-            .filter(r -> r.getIngredients().contains(Items.IRON_INGOT))
-            .collect(Collectors.toList());
 
- */
-    //public Stream<CraftingRecipe> ironRecipes = recipe.getAllRecipesFor(RecipeType.CRAFTING).stream().filter(item -> recipes.contains(Items.IRON_INGOT));
+
 
     private int ENERGY_CAPACITY = 50000;
     private int ENERGY_RECEIVE = 1000;
@@ -82,11 +75,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public BlockPos getMaster(){
         return masterCoords;
     }
-
-
-
-
-
 
 
     public SmelteryControllerBlockEntity(BlockPos pos, BlockState state) {
@@ -184,16 +172,26 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
             if(!inputItems.getStackInSlot(i).isEmpty()){
                 //do check here for items...if it's iron melt it down
-                if(ironRecipes.contains(inputItems.getStackInSlot(i))){
-
-                    inputItems.extractItem(i,1,false);
+                ItemStack stack = inputItems.getStackInSlot(i);
+                if(ironRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    stack.setCount(stack.getCount() - 1);
+                    setChanged();
                 }
                 //leave it
+                else if(goldRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    stack.setCount(stack.getCount() - 1);
+                    setChanged();
+                }
+                else if(diamondRecipes.contains(inputItems.getStackInSlot(i).getItem())){
+                    stack.setCount(stack.getCount() - 1);
+                    setChanged();
+                }
                 else{
 
                 }
             }
         }
+        energy.consumeEnergy(500);
     }
 
 
