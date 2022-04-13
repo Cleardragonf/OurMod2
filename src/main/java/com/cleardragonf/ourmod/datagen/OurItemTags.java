@@ -18,9 +18,26 @@ public class OurItemTags extends ItemTagsProvider {
     protected void addTags(){
         tag(Tags.Items.ORES)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD_ITEM.get())
-                .add(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get());
+                .add(Registration.NAQUDRIAH_ORE_DEEPSLATE_ITEM.get())
+                .add(Registration.COBALT_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.PLATINUM_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.SILVER_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.ALUMINIUM_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.MAGNESIUM_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.NICKEL_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.ZINC_ORE_OVERWORLD_ITEM.get())
+                .add(Registration.PHOSPHATE_ORE_DEEPSLATE_ITEM.get())
+                .add(Registration.SALT_ORE_OVERWORLD_ITEM.get());
         tag(Tags.Items.INGOTS)
-                .add(Registration.NAQUDAH_INGOT.get());
+                .add(Registration.NAQUDAH_INGOT.get())
+                .add(Registration.COBALT_INGOT.get())
+                .add(Registration.PLATINUM_INGOT.get())
+                .add(Registration.SILVER_INGOT.get())
+                .add(Registration.ALUMINIUM_INGOT.get())
+                .add(Registration.MAGNESIUM_INGOT.get())
+                .add(Registration.NICKEL_INGOT.get())
+                .add(Registration.ZINC_INGOT.get())
+                .add(Registration.PHOSPHATE_INGOT.get());
 
 
     }

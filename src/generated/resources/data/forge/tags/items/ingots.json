@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-    "ourmod:naqudah_ingot"
+    "ourmod:naqudah_ingot",
+    "ourmod:cobalt_ingot",
+    "ourmod:platinum_ingot",
+    "ourmod:silver_ingot",
+    "ourmod:aluminium_ingot",
+    "ourmod:magnesium_ingot",
+    "ourmod:nickel_ingot",
+    "ourmod:zinc_ingot",
+    "ourmod:phosphate_ingot"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ourmod:raw_silver"
+  },
+  "result": "ourmod:silver_ingot",
+  "experience": 0.0,
+  "cookingtime": 100
+}
