@@ -8,7 +8,7 @@ import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericSmelteryBlock;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.GenericSmelteryBlock;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerContainer;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmeltryControllerBlock;
@@ -97,7 +97,7 @@ public class Registration {
     public static final RegistryObject<Item> SMELTERY_CONTROLLER_ITEM = fromBlock(SMELTERY_CONTROLLER_BLOCK);
     public static final RegistryObject<BlockEntityType<SmelteryControllerBlockEntity>> SMELTERY_CONTROLLER_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_controller", () -> BlockEntityType.Builder.of(SmelteryControllerBlockEntity::new, SMELTERY_CONTROLLER_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<SmelteryControllerContainer>> SMELTERY_CONTAINER = CONTAINERS.register("smeltery_controller", () -> IForgeMenuType.create((windowId, inv, data) -> new SmelteryControllerContainer(windowId, data.readBlockPos(), inv, inv.player)));
-
+    public static final RegistryObject<GenericSmelteryBlock> SMELTERY_TANK_BLOCK = BLOCKS.register("smeltery_tank_block", new GenericSmelteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(10f).lightLevel(9f));
 
     //AstriaPorta Blocks
     public static final RegistryObject<SGBaseBlock> STARGATE_BLOCK = BLOCKS.register("stargate_base_block", SGBaseBlock::new);
