@@ -46,8 +46,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     boolean initialized = false;
 
     //master Block Settings
-    public boolean isMaster = true;
-    public BlockPos masterCoords = this.worldPosition;
+    public BlockPos controllerCords = this.worldPosition;
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
 
     //public list or Resources
@@ -63,71 +62,19 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
     public void addToList(SmelteryControllerBlockEntity block){
         wholeSmeltery.add(block);
-
     }
 
     public void removeToList(SmelteryControllerBlockEntity block){
         wholeSmeltery.remove(block);
     }
 
-    public BlockPos getMaster(){
-        return masterCoords;
+    public BlockPos getControllerCords(){
+        return controllerCords;
     }
 
 
     public SmelteryControllerBlockEntity(BlockPos pos, BlockState state) {
         super(Registration.SMELTERY_CONTROLLER_BLOCKENTITY.get(), pos, state);
-    }
-
-    public void setMaster(BlockPos position){
-        isMaster = true;
-        masterCoords = position;
-        if(level.getBlockState(position.above()).getBlock() instanceof SmeltryControllerBlock){
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.above());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-        }
-        else if(level.getBlockState(position.below()).getBlock() instanceof SmeltryControllerBlock){
-
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.below());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-
-        }else if(level.getBlockState(position.west()).getBlock() instanceof SmeltryControllerBlock){
-
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.west());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-        }else if(level.getBlockState(position.east()).getBlock() instanceof SmeltryControllerBlock){
-
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.east());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-        }else if(level.getBlockState(position.north()).getBlock() instanceof SmeltryControllerBlock){
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.north());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-        }else if(level.getBlockState(position.south()).getBlock() instanceof SmeltryControllerBlock){
-
-            SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(position.south());
-            isMaster = false;
-            masterCoords = block.masterCoords;
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.masterCoords);
-            masterBlock.addToList(this);
-        }else {
-            SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(worldPosition);
-            masterBlock.addToList(this);
-        }
     }
 
     public void tickServer() {
@@ -147,10 +94,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
         y = this.worldPosition.getY() - 1;
         z = this.worldPosition.getZ() - 1;
         tick = 0;
-        if(isMaster){
-            setMaster(this.worldPosition);
-        }
-
     }
 
     private void execute() {
@@ -259,12 +202,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public static final int INPUT_SLOTS = 26;
     public static final int OUTPUT_SLOTS = 1;
 
-    // The actual values for these properties
-    private boolean generating = false;
-    private boolean collecting = false;
-    private BlockState generatingBlock;
-    private boolean actuallyGenerating = false;
-
     // For collecting
     private int collectingTicker = 0;
     private AABB collectingBox = null;
@@ -366,10 +303,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         // This is called client side: remember the current state of the values that we're interested in
-        boolean oldGenerating = generating;
-        boolean oldCollecting = collecting;
-        boolean oldActuallyGenerating = actuallyGenerating;
-        BlockState oldGeneratingBlock = generatingBlock;
 
         CompoundTag tag = pkt.getTag();
         // This will call loadClientData()
@@ -377,12 +310,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
         // If any of the values was changed we request a refresh of our model data and send a block update (this will cause
         // the baked model to be recreated)
-        if (oldGenerating != generating || oldCollecting != collecting ||
-                oldActuallyGenerating != actuallyGenerating ||
-                !Objects.equals(generatingBlock, oldGeneratingBlock)) {
-            ModelDataManager.requestModelDataRefresh(this);
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
-        }
+
     }
 
     @Override
@@ -407,12 +335,6 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     private void saveClientData(CompoundTag tag) {
         CompoundTag infoTag = new CompoundTag();
         tag.put("Info", infoTag);
-        infoTag.putBoolean("generating", generating);
-        infoTag.putBoolean("collecting", collecting);
-        tag.putBoolean("actuallyGenerating", actuallyGenerating);
-        if (generatingBlock != null) {
-            infoTag.put("block", NbtUtils.writeBlockState(generatingBlock));
-        }
     }
 
     @Override
@@ -433,13 +355,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     private void loadClientData(CompoundTag tag) {
         if (tag.contains("Info")) {
             CompoundTag infoTag = tag.getCompound("Info");
-            generating = infoTag.getBoolean("generating");
-            collecting = infoTag.getBoolean("collecting");
-            if (infoTag.contains("block")) {
-                generatingBlock = NbtUtils.readBlockState(infoTag.getCompound("block"));
-            }
         }
-        actuallyGenerating = tag.getBoolean("actuallyGenerating");
     }
 
     @NotNull

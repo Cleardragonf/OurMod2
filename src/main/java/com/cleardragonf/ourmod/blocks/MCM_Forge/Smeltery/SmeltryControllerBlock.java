@@ -113,7 +113,7 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
                         SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(pos);
 
-                        return new SmelteryControllerContainer(windowId, block.masterCoords, playerInventory, playerEntity);
+                        return new SmelteryControllerContainer(windowId, pos, playerInventory, playerEntity);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
@@ -127,12 +127,9 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
         SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(pos);
-        SmelteryControllerBlockEntity masterBlock = (SmelteryControllerBlockEntity) level.getBlockEntity(block.getMaster());
-        if(masterBlock.energy.getEnergyStored() > 0){
-            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (masterBlock.energy.getEnergyStored() /10000)), Explosion.BlockInteraction.BREAK);
+        if(block.energy.getEnergyStored() > 0){
+            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (block.energy.getEnergyStored() /10000)), Explosion.BlockInteraction.BREAK);
 
-        }else{
-            masterBlock.removeToList(block);
         }
     }
 
