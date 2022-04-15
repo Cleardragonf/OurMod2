@@ -18,6 +18,9 @@ public class OurLootTables extends BaseLootTableProvider{
         lootTables.put(Registration.TRANSLOCATOR_BLOCK.get(), createStandardTable("translocator", Registration.TRANSLOCATOR_BLOCK.get(), Registration.TRANSLOCATOR_BLOCKENTITY.get()));
         lootTables.put(Registration.STARGATE_BLOCK.get(), createSimpleTable("stargate_block", Registration.STARGATE_BLOCK.get()));
         lootTables.put(Registration.SMELTERY_CONTROLLER_BLOCK.get(), createStandardTable("smeltery", Registration.SMELTERY_CONTROLLER_BLOCK.get(), Registration.SMELTERY_CONTROLLER_BLOCKENTITY.get()));
+        lootTables.put(Registration.SMELTERY_TANK_MODULE.get(), createStandardTable("smeltery", Registration.SMELTERY_TANK_MODULE.get(), Registration.SMELTERY_TANK_MODULE_BLOCKENTITY.get()));
+        lootTables.put(Registration.SMELTERY_HEAT_MODULE.get(), createStandardTable("smeltery", Registration.SMELTERY_HEAT_MODULE.get(), Registration.SMELTERY_HEAT_MODULE_BLOCKENTITY.get()));
+        lootTables.put(Registration.SMELTERY_BATTERY_MODULE.get(), createStandardTable("smeltery", Registration.SMELTERY_BATTERY_MODULE.get(), Registration.SMELTERY_BATTERY_MODULE_BLOCKENTITY.get()));
 
         lootTables.put(Registration.COBALT_ORE_OVERWORLD.get(), createSilkTouchTable("cobalt_ore_overworld", Registration.COBALT_ORE_OVERWORLD.get(), Registration.RAW_COBALT.get(), 1,4));
         lootTables.put(Registration.PLATINUM_ORE_OVERWORLD.get(), createSilkTouchTable("platinum_ore_overworld", Registration.PLATINUM_ORE_OVERWORLD.get(), Registration.RAW_PLATINUM.get(), 1,4));

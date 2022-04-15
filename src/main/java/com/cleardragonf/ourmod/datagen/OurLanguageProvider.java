@@ -30,6 +30,11 @@ public class OurLanguageProvider extends LanguageProvider {
         add(Registration.TRANSLOCATOR_BLOCK.get(), "Translocator");
         add(Registration.TRANSLOCATOR_TUNER.get(), "Link Translocators together");
 
+        add(Registration.SMELTERY_CONTROLLER_BLOCK.get(), "Smeltery Controller");
+        add(Registration.SMELTERY_TANK_MODULE.get(), "Smeltery Tank");
+        add(Registration.SMELTERY_BATTERY_MODULE.get(), "Smeltery Battery");
+        add(Registration.SMELTERY_HEAT_MODULE.get(), "Smeltery Heat Module");
+
         add(Registration.NAQUDAH_ORE_OVERWORLD.get(), "Naqudah Ore");
         add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get(), "Naqudriah Ore");
         add(Registration.RAW_NAQUDAH.get(), "Raw Naqudah");

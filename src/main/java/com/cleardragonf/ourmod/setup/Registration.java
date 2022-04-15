@@ -8,6 +8,8 @@ import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryModuleBlock;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryModuleBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerContainer;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmeltryControllerBlock;
@@ -156,6 +158,16 @@ public class Registration {
     public static final RegistryObject<Item> SMELTERY_CONTROLLER_ITEM = fromBlock(SMELTERY_CONTROLLER_BLOCK);
     public static final RegistryObject<BlockEntityType<SmelteryControllerBlockEntity>> SMELTERY_CONTROLLER_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_controller", () -> BlockEntityType.Builder.of(SmelteryControllerBlockEntity::new, SMELTERY_CONTROLLER_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<SmelteryControllerContainer>> SMELTERY_CONTAINER = CONTAINERS.register("smeltery_controller", () -> IForgeMenuType.create((windowId, inv, data) -> new SmelteryControllerContainer(windowId, data.readBlockPos(), inv, inv.player)));
+    public static final RegistryObject<SmelteryModuleBlock> SMELTERY_TANK_MODULE = BLOCKS.register("smeltery_tank_module", SmelteryModuleBlock::new);
+    public static final RegistryObject<Item> SMELTERY_TANK_MODULE_ITEM = fromBlock(SMELTERY_TANK_MODULE);
+    public static final RegistryObject<BlockEntityType<SmelteryModuleBlockEntity>> SMELTERY_TANK_MODULE_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_tank_module", () -> BlockEntityType.Builder.of(SmelteryModuleBlockEntity::new, SMELTERY_TANK_MODULE.get()).build(null));
+    public static final RegistryObject<SmelteryModuleBlock> SMELTERY_BATTERY_MODULE = BLOCKS.register("smeltery_battery_module", SmelteryModuleBlock::new);
+    public static final RegistryObject<Item> SMELTERY_BATTERY_MODULE_ITEM = fromBlock(SMELTERY_BATTERY_MODULE);
+    public static final RegistryObject<BlockEntityType<SmelteryModuleBlockEntity>> SMELTERY_BATTERY_MODULE_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_battery_module", () -> BlockEntityType.Builder.of(SmelteryModuleBlockEntity::new, SMELTERY_BATTERY_MODULE.get()).build(null));
+    public static final RegistryObject<SmelteryModuleBlock> SMELTERY_HEAT_MODULE = BLOCKS.register("smeltery_heat_module", SmelteryModuleBlock::new);
+    public static final RegistryObject<Item> SMELTERY_HEAT_MODULE_ITEM = fromBlock(SMELTERY_HEAT_MODULE);
+    public static final RegistryObject<BlockEntityType<SmelteryModuleBlockEntity>> SMELTERY_HEAT_MODULE_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_heat_module", () -> BlockEntityType.Builder.of(SmelteryModuleBlockEntity::new, SMELTERY_HEAT_MODULE.get()).build(null));
+
 
 
     //AstriaPorta Blocks
