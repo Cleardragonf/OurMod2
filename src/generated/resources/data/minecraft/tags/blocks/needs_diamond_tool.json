@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "ourmod:aluminium_ore_overworld",
-    "ourmod:magnesium_ore_overworld",
-    "ourmod:nickel_ore_overworld",
-    "ourmod:zinc_ore_overworld"
+    "ourmod:platinum_ore_overworld",
+    "ourmod:platinum_ore_deepslate",
+    "ourmod:cobalt_ore_deepslate",
+    "ourmod:cobalt_ore_overworld"
   ]
 }

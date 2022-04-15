@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "ourmod:salt_ore_overworld"
+    "ourmod:salt_ore_overworld",
+    "ourmod:salt_ore_deepslate",
+    "ourmod:aluminium_ore_overworld",
+    "ourmod:aluminium_ore_deepslate",
+    "ourmod:nickel_ore_overworld",
+    "ourmod:nickel_ore_deepslate",
+    "ourmod:zinc_ore_overworld",
+    "ourmod:zinc_ore_deepslate"
   ]
 }

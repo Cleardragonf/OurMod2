@@ -26,16 +26,16 @@ public class OresConfig {
                 .defineInRange("mysteriousAmount", 10, 1, Integer.MAX_VALUE);
         OVERWORLD_VEINSIZE = COMMON_BUILDER
                 .comment("Veinsize of our ore in the overworld dimension")
-                .defineInRange("overworldVeinsize", 20, 3, Integer.MAX_VALUE);
+                .defineInRange("overworldVeinsize", 50, 5, Integer.MAX_VALUE);
         OVERWORLD_AMOUNT = COMMON_BUILDER
                 .comment("Amount of veines of our ore in the overworld dimension")
-                .defineInRange("overworldAmount", 20, 3, Integer.MAX_VALUE);
+                .defineInRange("overworldAmount", 50, 5, Integer.MAX_VALUE);
         DEEPSLATE_VEINSIZE = COMMON_BUILDER
                 .comment("Veinsize of our ore in the overworld dimension but for deepslate")
-                .defineInRange("deepslateVeinsize", 20, 5, Integer.MAX_VALUE);
+                .defineInRange("deepslateVeinsize", 60, 5, Integer.MAX_VALUE);
         DEEPSLATE_AMOUNT = COMMON_BUILDER
                 .comment("Amount of veines of our ore in the overworld dimension but for deepslate")
-                .defineInRange("deepslateAmount", 20, 20, Integer.MAX_VALUE);
+                .defineInRange("deepslateAmount", 60, 20, Integer.MAX_VALUE);
         NETHER_VEINSIZE = COMMON_BUILDER
                 .comment("Veinsize of our ore in the nether dimension")
                 .defineInRange("netherVeinsize", 5, 1, Integer.MAX_VALUE);

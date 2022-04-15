@@ -4,13 +4,12 @@
     "ourmod:naqudah_ore_overworld",
     "ourmod:naqudah_generator",
     "ourmod:naqudriah_ore_deepslate",
+    "ourmod:silver_ore_deepslate",
+    "ourmod:silver_ore_overworld",
+    "ourmod:phosphate_ore_deepslate",
+    "ourmod:phosphate_ore_overworld",
     "ourmod:digger",
     "ourmod:battery",
-    "ourmod:aluminium_ore_overworld",
-    "ourmod:magnesium_ore_overworld",
-    "ourmod:nickel_ore_overworld",
-    "ourmod:zinc_ore_overworld",
-    "ourmod:phosphate_ore_overworld",
     "ourmod:translocator"
   ]
 }

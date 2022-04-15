@@ -8,14 +8,12 @@ import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.GenericSmelteryBlock;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerContainer;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmeltryControllerBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlock;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorBlockEntity;
 import com.cleardragonf.ourmod.blocks.NaqudahGenerator.NaqudahGeneratorContainer;
-import com.cleardragonf.ourmod.blocks.Ore.CustomOre;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlock;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorBlockEntity;
 import com.cleardragonf.ourmod.blocks.Translocators.TranslocatorContainer;
@@ -82,10 +80,28 @@ public class Registration {
     public static final RegistryObject<Item> NICKEL_ORE_OVERWORLD_ITEM = fromBlock(NICKEL_ORE_OVERWORLD);
     public static final RegistryObject<Block> ZINC_ORE_OVERWORLD = BLOCKS.register("zinc_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
     public static final RegistryObject<Item> ZINC_ORE_OVERWORLD_ITEM = fromBlock(ZINC_ORE_OVERWORLD);
-    public static final RegistryObject<Block> PHOSPHATE_ORE_DEEPSLATE = BLOCKS.register("phosphate_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
-    public static final RegistryObject<Item> PHOSPHATE_ORE_DEEPSLATE_ITEM = fromBlock(PHOSPHATE_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> PHOSPHATE_ORE_OVERWORLD = BLOCKS.register("phosphate_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> PHOSPHATE_ORE_OVERWORLD_ITEM = fromBlock(PHOSPHATE_ORE_OVERWORLD);
     public static final RegistryObject<Block> SALT_ORE_OVERWORLD = BLOCKS.register("salt_ore_overworld", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
     public static final RegistryObject<Item> SALT_ORE_OVERWORLD_ITEM = fromBlock(SALT_ORE_OVERWORLD);
+    public static final RegistryObject<Block> COBALT_ORE_DEEPSLATE = BLOCKS.register("cobalt_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> COBALT_ORE_DEEPSLATE_ITEM = fromBlock(COBALT_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> PLATINUM_ORE_DEEPSLATE = BLOCKS.register("platinum_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> PLATINUM_ORE_DEEPSLATE_ITEM = fromBlock(PLATINUM_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> SILVER_ORE_DEEPSLATE = BLOCKS.register("silver_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> SILVER_ORE_DEEPSLATE_ITEM = fromBlock(SILVER_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> ALUMINIUM_ORE_DEEPSLATE = BLOCKS.register("aluminium_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> ALUMINIUM_ORE_DEEPSLATE_ITEM = fromBlock(ALUMINIUM_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> MAGNESIUM_ORE_DEEPSLATE = BLOCKS.register("magnesium_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> MAGNESIUM_ORE_DEEPSLATE_ITEM = fromBlock(MAGNESIUM_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> NICKEL_ORE_DEEPSLATE = BLOCKS.register("nickel_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> NICKEL_ORE_DEEPSLATE_ITEM = fromBlock(NICKEL_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> ZINC_ORE_DEEPSLATE = BLOCKS.register("zinc_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> ZINC_ORE_DEEPSLATE_ITEM = fromBlock(ZINC_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> PHOSPHATE_ORE_DEEPSLATE = BLOCKS.register("phosphate_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> PHOSPHATE_ORE_DEEPSLATE_ITEM = fromBlock(PHOSPHATE_ORE_DEEPSLATE);
+    public static final RegistryObject<Block> SALT_ORE_DEEPSLATE = BLOCKS.register("salt_ore_deepslate", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F,3.0F), UniformInt.of(0,2)));
+    public static final RegistryObject<Item> SALT_ORE_DEEPSLATE_ITEM = fromBlock(SALT_ORE_DEEPSLATE);
     //Ore Items
     public static final RegistryObject<Item> RAW_COBALT = ITEMS.register("raw_cobalt", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> RAW_PLATINUM = ITEMS.register("raw_platinum", () -> new Item(ITEM_PROPERTIES));
@@ -140,7 +156,7 @@ public class Registration {
     public static final RegistryObject<Item> SMELTERY_CONTROLLER_ITEM = fromBlock(SMELTERY_CONTROLLER_BLOCK);
     public static final RegistryObject<BlockEntityType<SmelteryControllerBlockEntity>> SMELTERY_CONTROLLER_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_controller", () -> BlockEntityType.Builder.of(SmelteryControllerBlockEntity::new, SMELTERY_CONTROLLER_BLOCK.get()).build(null));
     public static final RegistryObject<MenuType<SmelteryControllerContainer>> SMELTERY_CONTAINER = CONTAINERS.register("smeltery_controller", () -> IForgeMenuType.create((windowId, inv, data) -> new SmelteryControllerContainer(windowId, data.readBlockPos(), inv, inv.player)));
-    public static final RegistryObject<GenericSmelteryBlock> SMELTERY_TANK_BLOCK = BLOCKS.register("smeltery_tank_block", new GenericSmelteryBlock(BlockBehaviour.Properties.of(Material.METAL).strength(10f).lightLevel(9f));
+
 
     //AstriaPorta Blocks
     public static final RegistryObject<SGBaseBlock> STARGATE_BLOCK = BLOCKS.register("stargate_base_block", SGBaseBlock::new);

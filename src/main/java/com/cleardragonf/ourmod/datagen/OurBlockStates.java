@@ -31,8 +31,17 @@ public class OurBlockStates extends BlockStateProvider {
         simpleBlock(Registration.MAGNESIUM_ORE_OVERWORLD.get());
         simpleBlock(Registration.NICKEL_ORE_OVERWORLD.get());
         simpleBlock(Registration.ZINC_ORE_OVERWORLD.get());
-        simpleBlock(Registration.PHOSPHATE_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.PHOSPHATE_ORE_OVERWORLD.get());
         simpleBlock(Registration.SALT_ORE_OVERWORLD.get());
+        simpleBlock(Registration.COBALT_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.PLATINUM_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.SILVER_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.ALUMINIUM_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.MAGNESIUM_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.NICKEL_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.ZINC_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.PHOSPHATE_ORE_DEEPSLATE.get());
+        simpleBlock(Registration.SALT_ORE_DEEPSLATE.get());
         simpleBlock(Registration.DIGGER_BLOCK.get());
         simpleBlock(Registration.BATTERY_BLOCK.get());
         simpleBlock(Registration.TRANSLOCATOR_BLOCK.get());
