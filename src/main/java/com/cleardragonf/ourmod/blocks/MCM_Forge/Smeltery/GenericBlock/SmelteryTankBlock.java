@@ -1,4 +1,6 @@
 package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock;
+
+import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -34,7 +36,7 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SmelteryModuleBlock extends Block implements EntityBlock {
+public class SmelteryTankBlock extends Block implements EntityBlock {
 
 
     public static final String MESSAGE_POWERGEN = "message.powergen";
@@ -42,8 +44,7 @@ public class SmelteryModuleBlock extends Block implements EntityBlock {
 
     private static final VoxelShape RENDER_SHAPE = Shapes.box(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
 
-
-    public SmelteryModuleBlock() {
+    public SmelteryTankBlock() {
         super(Properties.of(Material.METAL)
                 .sound(SoundType.METAL)
                 .strength(2.0f)
@@ -67,7 +68,7 @@ public class SmelteryModuleBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new SmelteryModuleBlockEntity(blockPos, blockState);
+        return new SmelteryTankBlockEntity(blockPos, blockState);
     }
 
     @Nullable
@@ -77,7 +78,7 @@ public class SmelteryModuleBlock extends Block implements EntityBlock {
             return null;
         }
         return (lvl, pos, blockState, t) -> {
-            if (t instanceof SmelteryModuleBlockEntity tile) {
+            if (t instanceof SmelteryTankBlockEntity tile) {
                 tile.tickServer();
             }
         };
@@ -95,14 +96,54 @@ public class SmelteryModuleBlock extends Block implements EntityBlock {
         return super.getStateForPlacement(context).setValue(BlockStateProperties.POWERED, false);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
-        SmelteryModuleBlockEntity block = (SmelteryModuleBlockEntity) level.getBlockEntity(pos);
-        if(block.energy.getEnergyStored() > 0){
-            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (block.energy.getEnergyStored() /10000)), Explosion.BlockInteraction.BREAK);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
 
+        if (!level.isClientSide) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof SmelteryTankBlockEntity) {
+                MenuProvider containerProvider = new MenuProvider() {
+                    @Override
+                    public Component getDisplayName() {
+                        return new TranslatableComponent(SCREEN_TUTORIAL_POWERGEN);
+                    }
+
+                    @Override
+                    public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
+                        SmelteryTankBlockEntity block = (SmelteryTankBlockEntity) level.getBlockEntity(pos);
+
+                        return new BatteryContainer(windowId, block.masterCoords, playerInventory, playerEntity);
+                    }
+                };
+                NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
+            } else {
+                throw new IllegalStateException("Our named container provider is missing!");
+            }
         }
+        return InteractionResult.SUCCESS;
     }
 
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
+        SmelteryTankBlockEntity block = (SmelteryTankBlockEntity) level.getBlockEntity(pos);
+        SmelteryTankBlockEntity masterBlock = (SmelteryTankBlockEntity) level.getBlockEntity(block.getMaster());
 
+
+        if(block.isMaster) {
+            if (masterBlock.energy.getEnergyStored() > 0) {
+                for (BlockPos be :
+                        masterBlock.wholeTank) {
+                    level.destroyBlock(be, true);
+                }
+                level.explode(p_49855_, pos.getX(), pos.getY(), pos.getZ(), (1.0f * (masterBlock.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+            }else{
+                for(BlockPos be: masterBlock.wholeTank){
+                    level.destroyBlock(be, true);
+                }
+            }
+        }else {
+            masterBlock.removeToList(block);
+        }
+    }
 }

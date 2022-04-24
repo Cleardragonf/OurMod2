@@ -1,5 +1,7 @@
 package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery;
 
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlock;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -129,7 +131,11 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
         SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(pos);
         if(block.energy.getEnergyStored() > 0){
             level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * (block.energy.getEnergyStored() /10000)), Explosion.BlockInteraction.BREAK);
-
+            level.explode(p_49855_,block.masterTank.getX(),block.masterTank.getY(),block.masterTank.getZ(),(1.0f * (block.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+        }
+        if(block.masterTank != null){
+            SmelteryTankBlock tankblock = (SmelteryTankBlock) level.getBlockState(block.masterTank).getBlock();
+            tankblock.playerWillDestroy(level,block.masterTank,p_49854_,p_49855_);
         }
     }
 

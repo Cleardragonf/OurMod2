@@ -26,8 +26,6 @@
     "ourmod:battery",
     "ourmod:translocator",
     "ourmod:smeltery_tank_module",
-    "ourmod:smeltery_heat_module",
-    "ourmod:smeltery_battery_module",
     "ourmod:stargate_base_block"
   ]
 }
