@@ -47,6 +47,11 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public List<BlockPos> allHeats = new ArrayList<>();
     public BlockPos masterTank;
     public BlockPos masterHeat;
+    public int cookingTimeSlot1;public int cookingTimeSlot2;public int cookingTimeSlot3;public int cookingTimeSlot4;public int cookingTimeSlot5;public int cookingTimeSlot6;public int cookingTimeSlot7;
+    public int cookingTimeSlot8;public int cookingTimeSlot9;public int cookingTimeSlot10;public int cookingTimeSlot11;public int cookingTimeSlot12;public int cookingTimeSlot13;
+    public int cookingTimeSlot14;public int cookingTimeSlot15;public int cookingTimeSlot16;public int cookingTimeSlot17;public int cookingTimeSlot18;public int cookingTimeSlot19;
+    public int cookingTimeSlot20;public int cookingTimeSlot21;public int cookingTimeSlot22;public int cookingTimeSlot23;public int cookingTimeSlot24;public int cookingTimeSlot25;public int cookingTimeSlot26;
+    public int melttime;
 
     //public list or Resources
     public int MAX_TANK_AMOUNT = 100;
@@ -102,6 +107,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
         //if there's enough energy go through Melting (eventually making this number lower possibly)
         OurMod.LOGGER.log(Level.INFO, "Number of Tanks: " + allTanks.stream().count());
         OurMod.LOGGER.log(Level.INFO, "Number of HEATS: " + allHeats.stream().count());
+        MAX_TANK_AMOUNT = Math.toIntExact(allTanks.stream().count()) * 100;
         if(energy.getEnergyStored() > meltingCost){
             melt();
             OurMod.LOGGER.log(Level.INFO, "Iron: " + ironAmount + ", Gold: " + goldAmount + ", Diamond: " + diamondAmount);
@@ -118,11 +124,9 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
                 //do check here for items...if it's iron melt it down
                 ItemStack stack = inputItems.getStackInSlot(i);
                 if(ironRecipes.contains(inputItems.getStackInSlot(i).getItem())){
-                    if(CURR_TANK_AMOUNT < MAX_TANK_AMOUNT){
-                        convertToMB(inputItems.getStackInSlot(i), "iron");
-                        stack.setCount(stack.getCount() - 1);
-                        energy.consumeEnergy(meltingCost);
-                        setChanged();
+                    int ATTEMPTING_TANK_AMOUNT = CURR_TANK_AMOUNT + checkMBAmount(inputItems.getStackInSlot(i));
+                    if(ATTEMPTING_TANK_AMOUNT < MAX_TANK_AMOUNT){
+                        checkMeltingProgress(i, "iron",stack);
                     }
                 }
                 //leave it
@@ -162,6 +166,201 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
                 }
             }
+        }
+    }
+
+    private int checkMBAmount(ItemStack stackInSlot) {
+        if(stackInSlot.is(Tags.Items.NUGGETS)){
+            return 2;
+        }
+        else if(stackInSlot.is(Tags.Items.ORES)){
+            return 162;
+        }
+        else if(stackInSlot.is(Tags.Items.INGOTS)){
+            return 18;
+        }
+        else if(stackInSlot.is(Tags.Items.GEMS)){
+            return 18;
+        }
+        else{
+            return 1;
+        }
+    }
+
+
+    private void checkMeltingProgress(int i, String material,ItemStack stack){
+        switch (i){
+            case 1:
+                if(cookingTimeSlot1 == melttime){
+                    cookingTimeSlot1 = 0;
+                    convertToMB(inputItems.getStackInSlot(1), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot1++;
+                }
+                break;
+            case 2:
+                if(cookingTimeSlot2 == melttime){
+                    cookingTimeSlot2 = 0;
+                    convertToMB(inputItems.getStackInSlot(2), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot2++;
+                }
+                break;
+            case 3:
+                if(cookingTimeSlot3 == melttime){
+                    cookingTimeSlot3 = 0;
+                    convertToMB(inputItems.getStackInSlot(3), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot3++;
+                }
+                break;
+            case 4:
+                if(cookingTimeSlot4 == melttime){
+                    cookingTimeSlot4 = 0;
+                    convertToMB(inputItems.getStackInSlot(4), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot4++;
+                }
+                break;
+            case 5:
+                if(cookingTimeSlot5 == melttime){
+                    cookingTimeSlot5 = 0;
+                    convertToMB(inputItems.getStackInSlot(5), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot5++;
+                }
+                break;
+            case 6:
+                if(cookingTimeSlot6 == melttime){
+                    cookingTimeSlot6 = 0;
+                    convertToMB(inputItems.getStackInSlot(6), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot6++;
+                }
+                break;
+            case 7:
+                if(cookingTimeSlot7 == melttime){
+                    cookingTimeSlot7 = 0;
+                    convertToMB(inputItems.getStackInSlot(7), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot7++;
+                }
+                break;
+            case 8:
+                if(cookingTimeSlot8 == melttime){
+                cookingTimeSlot8 = 0;
+                convertToMB(inputItems.getStackInSlot(8), material);
+                stack.setCount(stack.getCount() -1);
+                energy.consumeEnergy(meltingCost);
+                setChanged();
+            }else{
+                cookingTimeSlot8++;
+            }
+                break;
+            case 9:
+                if(cookingTimeSlot9 == melttime){
+                    cookingTimeSlot9 = 0;
+                    convertToMB(inputItems.getStackInSlot(9), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot9++;
+                }
+                break;
+            case 10:
+                if(cookingTimeSlot10 == melttime){
+                    cookingTimeSlot10 = 0;
+                    convertToMB(inputItems.getStackInSlot(10), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot10++;
+                }
+                break;
+            case 11:
+                if(cookingTimeSlot11 == melttime){
+                    cookingTimeSlot11 = 0;
+                    convertToMB(inputItems.getStackInSlot(11), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot11++;
+                }
+                break;
+            case 12:
+                if(cookingTimeSlot12 == melttime){
+                    cookingTimeSlot12 = 0;
+                    convertToMB(inputItems.getStackInSlot(12), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot12++;
+                }
+                break;
+            case 13:
+                if(cookingTimeSlot13 == melttime){
+                    cookingTimeSlot13 = 0;
+                    convertToMB(inputItems.getStackInSlot(13), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot13++;
+                }
+                break;
+            case 14:
+                break;
+            case 15:
+                break;
+            case 16:
+                break;
+            case 17:
+                break;
+            case 18:
+                break;
+            case 19:
+                break;
+            case 20:
+                break;
+            case 21:
+                break;
+            case 22:
+                break;
+            case 23:
+                break;
+            case 24:
+                break;
+            case 25:
+                break;
+            case 26:
+                break;
+            default:
+                break;
         }
     }
 

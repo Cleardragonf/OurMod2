@@ -143,7 +143,9 @@ public class SmelteryHeatBlock extends Block implements EntityBlock {
                 }
             }
         }else {
-            masterBlock.removeToList(block);
+            if(level.getBlockEntity(pos) != null && block instanceof SmelteryHeatBlockEntity){
+                masterBlock.removeToList(block);
+            }
         }
     }
 }

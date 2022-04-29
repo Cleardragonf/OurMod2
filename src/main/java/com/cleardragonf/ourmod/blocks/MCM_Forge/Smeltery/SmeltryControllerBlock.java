@@ -1,6 +1,7 @@
 package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery;
 
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryHeatBlock;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryHeatBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlock;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlockEntity;
 import net.minecraft.ChatFormatting;
@@ -141,11 +142,11 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
                 level.explode(p_49855_,block.masterHeat.getX(),block.masterHeat.getY(),block.masterHeat.getZ(),(1.0f * (block.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
             }
         }
-        if(block.masterTank != null){
+        if(block.masterTank != null && level.getBlockEntity(block.masterTank) instanceof SmelteryTankBlockEntity){
             SmelteryTankBlock tankblock = (SmelteryTankBlock) level.getBlockState(block.masterTank).getBlock();
             tankblock.playerWillDestroy(level,block.masterTank,p_49854_,p_49855_);
         }
-        if(block.masterHeat != null){
+        if(block.masterHeat != null&& level.getBlockEntity(block.masterHeat) instanceof SmelteryHeatBlockEntity){
             SmelteryHeatBlock heatBlock = (SmelteryHeatBlock) level.getBlockState(block.masterHeat).getBlock();
             heatBlock.playerWillDestroy(level,block.masterHeat,p_49854_,p_49855_);
         }

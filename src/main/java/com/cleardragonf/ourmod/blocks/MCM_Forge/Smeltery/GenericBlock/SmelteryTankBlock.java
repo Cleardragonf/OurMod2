@@ -128,8 +128,6 @@ public class SmelteryTankBlock extends Block implements EntityBlock {
     public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
         SmelteryTankBlockEntity block = (SmelteryTankBlockEntity) level.getBlockEntity(pos);
         SmelteryTankBlockEntity masterBlock = (SmelteryTankBlockEntity) level.getBlockEntity(block.getMaster());
-
-
         if(block.isMaster) {
             if (masterBlock.energy.getEnergyStored() > 0) {
                 for (BlockPos be :
@@ -143,7 +141,9 @@ public class SmelteryTankBlock extends Block implements EntityBlock {
                 }
             }
         }else {
-            masterBlock.removeToList(block);
+            if(level.getBlockEntity(pos) != null && block instanceof SmelteryTankBlockEntity && masterBlock != null){
+                masterBlock.removeToList(block);
+            }
         }
     }
 }
