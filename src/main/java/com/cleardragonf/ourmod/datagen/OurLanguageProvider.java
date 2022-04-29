@@ -32,6 +32,7 @@ public class OurLanguageProvider extends LanguageProvider {
 
         add(Registration.SMELTERY_CONTROLLER_BLOCK.get(), "Smeltery Controller");
         add(Registration.SMELTERY_TANK_MODULE.get(), "Smeltery Tank");
+        add(Registration.SMELTERY_HEAT_MODULE.get(), "Smeltery Heat Increaser");
 
         add(Registration.NAQUDAH_ORE_OVERWORLD.get(), "Naqudah Ore");
         add(Registration.NAQUDRIAH_ORE_DEEPSLATE.get(), "Naqudriah Ore");

@@ -8,6 +8,8 @@ import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlock;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerBlockEntity;
 import com.cleardragonf.ourmod.blocks.Digger.DiggerContainer;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryHeatBlock;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryHeatBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlock;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlockEntity;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
@@ -161,6 +163,10 @@ public class Registration {
     public static final RegistryObject<SmelteryTankBlock> SMELTERY_TANK_MODULE = BLOCKS.register("smeltery_tank_module", SmelteryTankBlock::new);
     public static final RegistryObject<Item> SMELTERY_TANK_MODULE_ITEM = fromBlock(SMELTERY_TANK_MODULE);
     public static final RegistryObject<BlockEntityType<SmelteryTankBlockEntity>> SMELTERY_TANK_MODULE_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_tank_module", () -> BlockEntityType.Builder.of(SmelteryTankBlockEntity::new, SMELTERY_TANK_MODULE.get()).build(null));
+    public static final RegistryObject<SmelteryHeatBlock> SMELTERY_HEAT_MODULE = BLOCKS.register("smeltery_heat_module", SmelteryHeatBlock::new);
+    public static final RegistryObject<Item> SMELTERY_HEAT_MODULE_ITEM = fromBlock(SMELTERY_HEAT_MODULE);
+    public static final RegistryObject<BlockEntityType<SmelteryHeatBlockEntity>> SMELTERY_HEAT_MODULE_BLOCKENTITY = BLOCK_ENTITIES.register("smeltery_heat_module", () -> BlockEntityType.Builder.of(SmelteryHeatBlockEntity::new, SMELTERY_HEAT_MODULE.get()).build(null));
+
 
 
 

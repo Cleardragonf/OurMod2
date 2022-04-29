@@ -41,6 +41,7 @@ public class OurItemModels extends ItemModelProvider {
         withExistingParent(Registration.BATTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/battery"));
         withExistingParent(Registration.SMELTERY_CONTROLLER_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery_controller"));
         withExistingParent(Registration.SMELTERY_TANK_MODULE.get().getRegistryName().getPath(), modLoc("block/smeltery_controller"));
+        withExistingParent(Registration.SMELTERY_HEAT_MODULE.get().getRegistryName().getPath(), modLoc("block/smeltery_controller"));
         //withExistingParent(Registration.SMELTERY_ITEM.get().getRegistryName().getPath(), modLoc("block/smeltery"));
         withExistingParent(Registration.TRANSLOCATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/translocator"));
         withExistingParent(Registration.STARGATE_ITEM.get().getRegistryName().getPath(), modLoc("block/stargate_base_block"));

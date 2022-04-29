@@ -42,6 +42,7 @@ public class OurBlockTags extends BlockTagsProvider {
                 .add(Registration.BATTERY_BLOCK.get())
                 .add(Registration.TRANSLOCATOR_BLOCK.get())
                 .add(Registration.SMELTERY_TANK_MODULE.get())
+                .add(Registration.SMELTERY_HEAT_MODULE.get())
                 .add(Registration.STARGATE_BLOCK.get());
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(Registration.NAQUDAH_ORE_OVERWORLD.get())

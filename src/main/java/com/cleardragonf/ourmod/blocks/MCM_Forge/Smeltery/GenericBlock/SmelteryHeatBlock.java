@@ -1,8 +1,6 @@
-package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery;
+package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock;
 
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryHeatBlock;
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlock;
-import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock.SmelteryTankBlockEntity;
+import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -38,7 +36,7 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SmeltryControllerBlock extends Block implements EntityBlock {
+public class SmelteryHeatBlock extends Block implements EntityBlock {
 
 
     public static final String MESSAGE_POWERGEN = "message.powergen";
@@ -46,8 +44,7 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
 
     private static final VoxelShape RENDER_SHAPE = Shapes.box(0.1, 0.1, 0.1, 0.9, 0.9, 0.9);
 
-
-    public SmeltryControllerBlock() {
+    public SmelteryHeatBlock() {
         super(Properties.of(Material.METAL)
                 .sound(SoundType.METAL)
                 .strength(2.0f)
@@ -71,7 +68,7 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new SmelteryControllerBlockEntity(blockPos, blockState);
+        return new SmelteryHeatBlockEntity(blockPos, blockState);
     }
 
     @Nullable
@@ -81,7 +78,7 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
             return null;
         }
         return (lvl, pos, blockState, t) -> {
-            if (t instanceof SmelteryControllerBlockEntity tile) {
+            if (t instanceof SmelteryHeatBlockEntity tile) {
                 tile.tickServer();
             }
         };
@@ -105,7 +102,7 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
 
         if (!level.isClientSide) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof SmelteryControllerBlockEntity) {
+            if (be instanceof SmelteryHeatBlockEntity) {
                 MenuProvider containerProvider = new MenuProvider() {
                     @Override
                     public Component getDisplayName() {
@@ -114,9 +111,9 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
 
                     @Override
                     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-                        SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(pos);
+                        SmelteryHeatBlockEntity block = (SmelteryHeatBlockEntity) level.getBlockEntity(pos);
 
-                        return new SmelteryControllerContainer(windowId, pos, playerInventory, playerEntity);
+                        return new BatteryContainer(windowId, block.masterCoords, playerInventory, playerEntity);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
@@ -129,27 +126,24 @@ public class SmeltryControllerBlock extends Block implements EntityBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
-        SmelteryControllerBlockEntity block = (SmelteryControllerBlockEntity) level.getBlockEntity(pos);
-        if(block.energy.getEnergyStored() > 0){
-            int explosion = block.energy.getEnergyStored() / 10000;
+        SmelteryHeatBlockEntity block = (SmelteryHeatBlockEntity) level.getBlockEntity(pos);
+        SmelteryHeatBlockEntity masterBlock = (SmelteryHeatBlockEntity) level.getBlockEntity(block.getMaster());
 
-            level.explode(p_49855_,pos.getX(),pos.getY(),pos.getZ(),(1.0f * explosion), Explosion.BlockInteraction.BREAK);
-            if(block.masterTank != null){
-                level.explode(p_49855_,block.masterTank.getX(),block.masterTank.getY(),block.masterTank.getZ(),(1.0f * (block.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+
+        if(block.isMaster) {
+            if (masterBlock.energy.getEnergyStored() > 0) {
+                for (BlockPos be :
+                        masterBlock.wholeHeat) {
+                    level.destroyBlock(be, true);
+                }
+                level.explode(p_49855_, pos.getX(), pos.getY(), pos.getZ(), (1.0f * (masterBlock.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+            }else{
+                for(BlockPos be: masterBlock.wholeHeat){
+                    level.destroyBlock(be, true);
+                }
             }
-            if(block.masterHeat != null){
-                level.explode(p_49855_,block.masterHeat.getX(),block.masterHeat.getY(),block.masterHeat.getZ(),(1.0f * (block.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
-            }
-        }
-        if(block.masterTank != null){
-            SmelteryTankBlock tankblock = (SmelteryTankBlock) level.getBlockState(block.masterTank).getBlock();
-            tankblock.playerWillDestroy(level,block.masterTank,p_49854_,p_49855_);
-        }
-        if(block.masterHeat != null){
-            SmelteryHeatBlock heatBlock = (SmelteryHeatBlock) level.getBlockState(block.masterHeat).getBlock();
-            heatBlock.playerWillDestroy(level,block.masterHeat,p_49854_,p_49855_);
+        }else {
+            masterBlock.removeToList(block);
         }
     }
-
-
 }

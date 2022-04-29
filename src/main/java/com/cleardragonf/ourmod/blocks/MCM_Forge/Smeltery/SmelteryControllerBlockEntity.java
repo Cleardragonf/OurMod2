@@ -44,15 +44,19 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     public BlockPos controllerCords = this.worldPosition;
     public List<SmelteryControllerBlockEntity> wholeSmeltery = new ArrayList<>();
     public List<BlockPos> allTanks = new ArrayList<>();
+    public List<BlockPos> allHeats = new ArrayList<>();
     public BlockPos masterTank;
+    public BlockPos masterHeat;
 
     //public list or Resources
     public int MAX_TANK_AMOUNT = 100;
+    public int HEAT_AMOUNT = 10;
     public int ironAmount = 0;
     public int goldAmount = 0;
     public int diamondAmount = 0;
     public int meltingCost = 500;
     public int CURR_TANK_AMOUNT = 0;
+    public int CURR_HEAT_AMOUNT = 0;
 
     private int ENERGY_CAPACITY = 50000;
     private int ENERGY_RECEIVE = 1000;
@@ -97,6 +101,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     private void execute() {
         //if there's enough energy go through Melting (eventually making this number lower possibly)
         OurMod.LOGGER.log(Level.INFO, "Number of Tanks: " + allTanks.stream().count());
+        OurMod.LOGGER.log(Level.INFO, "Number of HEATS: " + allHeats.stream().count());
         if(energy.getEnergyStored() > meltingCost){
             melt();
             OurMod.LOGGER.log(Level.INFO, "Iron: " + ironAmount + ", Gold: " + goldAmount + ", Diamond: " + diamondAmount);
@@ -106,6 +111,7 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     private void melt(){
         //loops through all Inventory slots available in the Smeltery Controllers GUI
         CURR_TANK_AMOUNT = ironAmount + diamondAmount + goldAmount;
+        CURR_HEAT_AMOUNT = HEAT_AMOUNT * Math.toIntExact(allHeats.stream().count());
         for (int i = 0; i < 26; i++) {
             //find the slots that are not empty and then 'melt them down piece by peice'
             if(!inputItems.getStackInSlot(i).isEmpty()){
@@ -216,9 +222,14 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
 
         }
     }
+    public void addHeatToList(List<BlockPos> list){
+        for (BlockPos heat :
+                list) {
+            if(!allHeats.contains(heat)){
+                allHeats.add(heat);
+            }
 
-    public void addTankToList(BlockPos tank){
-        allTanks.add(tank);
+        }
     }
 
 
