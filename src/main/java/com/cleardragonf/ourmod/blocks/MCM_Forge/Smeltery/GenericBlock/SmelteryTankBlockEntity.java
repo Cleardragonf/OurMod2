@@ -3,32 +3,20 @@ package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock;
 import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.setup.Registration;
-import com.cleardragonf.ourmod.variables.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.model.ModelDataManager;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +34,6 @@ public class SmelteryTankBlockEntity extends BlockEntity {
     public BlockPos masterControllerCoords;
 
     private int TANK_CAPACITY = 100;
-    private int ENERGY_RECEIVE = 1000;
 
     public void addToList(BlockPos block){
         wholeTank.add(block);
@@ -129,9 +116,7 @@ public class SmelteryTankBlockEntity extends BlockEntity {
             checkForController();
             OurMod.LOGGER.log(Level.INFO, wholeTank.size());
             OurMod.LOGGER.log(Level.INFO, TANK_CAPACITY);
-            OurMod.LOGGER.log(Level.INFO, this.energy.getEnergyStored());
             TANK_CAPACITY = 100 * wholeTank.size();
-            energy.setCapacity(TANK_CAPACITY);
         }
     }
 
@@ -182,17 +167,6 @@ public class SmelteryTankBlockEntity extends BlockEntity {
 
     // A direct reference to our items and energy for easy access inside our block entity
     // LazyOptionals to return with getCapability()
-    public CustomEnergyStorage energy = createEnergyStorage();
-    public LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
-
-    private CustomEnergyStorage createEnergyStorage() {
-        return new CustomEnergyStorage(TANK_CAPACITY, ENERGY_RECEIVE) {
-            @Override
-            protected void onEnergyChanged() {
-                setChanged();
-            }
-        };
-    }
 
     // The getUpdateTag()/handleUpdateTag() pair is called whenever the client receives a new chunk
     // it hasn't seen before. i.e. the chunk is loaded
@@ -246,14 +220,12 @@ public class SmelteryTankBlockEntity extends BlockEntity {
     @Override
     public void setRemoved() {
         super.setRemoved();
-        energyHandler.invalidate();
     }
 
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         saveClientData(tag);
-        tag.put("Energy", energy.serializeNBT());
         CompoundTag infoTag = tag.getCompound("Info");
         infoTag.putInt("Generating", generatingCounter);
     }
@@ -273,9 +245,6 @@ public class SmelteryTankBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         loadClientData(tag);
-        if (tag.contains("Energy")) {
-            energy.deserializeNBT(tag.get("Energy"));
-        }
         if (tag.contains("Info")) {
             generatingCounter = tag.getCompound("Info").getInt("Generating");
         }
@@ -296,11 +265,7 @@ public class SmelteryTankBlockEntity extends BlockEntity {
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityEnergy.ENERGY) {
-            return energyHandler.cast();
-        } else {
             return super.getCapability(cap, side);
-        }
     }
 
 

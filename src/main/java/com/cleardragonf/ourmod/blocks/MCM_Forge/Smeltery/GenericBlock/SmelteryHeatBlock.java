@@ -1,6 +1,7 @@
 package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock;
 
 import com.cleardragonf.ourmod.blocks.Battery.BatteryContainer;
+import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -128,24 +129,26 @@ public class SmelteryHeatBlock extends Block implements EntityBlock {
     public void playerWillDestroy(Level level, BlockPos pos, BlockState p_49854_, Player p_49855_) {
         SmelteryHeatBlockEntity block = (SmelteryHeatBlockEntity) level.getBlockEntity(pos);
         SmelteryHeatBlockEntity masterBlock = (SmelteryHeatBlockEntity) level.getBlockEntity(block.getMaster());
-
-
-        if(block.isMaster) {
-            if (masterBlock.energy.getEnergyStored() > 0) {
-                for (BlockPos be :
-                        masterBlock.wholeHeat) {
-                    level.destroyBlock(be, true);
+        if(masterBlock != null && masterBlock.masterControllerCoords != null){
+            SmelteryControllerBlockEntity masterController = (SmelteryControllerBlockEntity) level.getBlockEntity(masterBlock.masterControllerCoords);
+            if(block.isMaster) {
+                if (masterController.energy.getEnergyStored() > 0) {
+                    for (BlockPos be :
+                            masterBlock.wholeHeat) {
+                        level.destroyBlock(be, true);
+                    }
+                    level.explode(p_49855_, pos.getX(), pos.getY(), pos.getZ(), (1.0f * (masterController.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
+                }else{
+                    for(BlockPos be: masterBlock.wholeHeat){
+                        level.destroyBlock(be, true);
+                    }
                 }
-                level.explode(p_49855_, pos.getX(), pos.getY(), pos.getZ(), (1.0f * (masterBlock.energy.getEnergyStored() / 10000)), Explosion.BlockInteraction.BREAK);
-            }else{
-                for(BlockPos be: masterBlock.wholeHeat){
-                    level.destroyBlock(be, true);
+            }else {
+                if(level.getBlockEntity(pos) != null && block instanceof SmelteryHeatBlockEntity){
+                    masterBlock.removeToList(block);
                 }
-            }
-        }else {
-            if(level.getBlockEntity(pos) != null && block instanceof SmelteryHeatBlockEntity){
-                masterBlock.removeToList(block);
             }
         }
+
     }
 }

@@ -3,7 +3,6 @@ package com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.GenericBlock;
 import com.cleardragonf.ourmod.OurMod;
 import com.cleardragonf.ourmod.blocks.MCM_Forge.Smeltery.SmelteryControllerBlockEntity;
 import com.cleardragonf.ourmod.setup.Registration;
-import com.cleardragonf.ourmod.variables.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +35,6 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
     public BlockPos masterControllerCoords;
 
     private int HEAT_CAPACITY = 100;
-    private int ENERGY_RECEIVE = 1000;
 
     public void addToList(BlockPos block){
         wholeHeat.add(block);
@@ -121,9 +117,7 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
             checkForController();
             OurMod.LOGGER.log(Level.INFO, wholeHeat.size());
             OurMod.LOGGER.log(Level.INFO, HEAT_CAPACITY);
-            OurMod.LOGGER.log(Level.INFO, this.energy.getEnergyStored());
             HEAT_CAPACITY = 100 * wholeHeat.size();
-            energy.setCapacity(HEAT_CAPACITY);
         }
     }
 
@@ -171,20 +165,6 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
 
     // For generating our ores
     private int generatingCounter = 0;
-
-    // A direct reference to our items and energy for easy access inside our block entity
-    // LazyOptionals to return with getCapability()
-    public CustomEnergyStorage energy = createEnergyStorage();
-    public LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
-
-    private CustomEnergyStorage createEnergyStorage() {
-        return new CustomEnergyStorage(HEAT_CAPACITY, ENERGY_RECEIVE) {
-            @Override
-            protected void onEnergyChanged() {
-                setChanged();
-            }
-        };
-    }
 
     // The getUpdateTag()/handleUpdateTag() pair is called whenever the client receives a new chunk
     // it hasn't seen before. i.e. the chunk is loaded
@@ -238,14 +218,12 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
     @Override
     public void setRemoved() {
         super.setRemoved();
-        energyHandler.invalidate();
     }
 
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         saveClientData(tag);
-        tag.put("Energy", energy.serializeNBT());
         CompoundTag infoTag = tag.getCompound("Info");
         infoTag.putInt("Generating", generatingCounter);
     }
@@ -265,9 +243,6 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         loadClientData(tag);
-        if (tag.contains("Energy")) {
-            energy.deserializeNBT(tag.get("Energy"));
-        }
         if (tag.contains("Info")) {
             generatingCounter = tag.getCompound("Info").getInt("Generating");
         }
@@ -288,11 +263,7 @@ public class SmelteryHeatBlockEntity extends BlockEntity {
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityEnergy.ENERGY) {
-            return energyHandler.cast();
-        } else {
             return super.getCapability(cap, side);
-        }
     }
 
 
