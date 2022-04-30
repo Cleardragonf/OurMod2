@@ -129,37 +129,28 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
                         checkMeltingProgress(i, "iron",stack);
                     }
                 }
-                //leave it
                 else if(goldRecipes.contains(inputItems.getStackInSlot(i).getItem())){
-                    if(CURR_TANK_AMOUNT < MAX_TANK_AMOUNT){
-                        convertToMB(inputItems.getStackInSlot(i), "gold");
-                        stack.setCount(stack.getCount() - 1);
-                        energy.consumeEnergy(meltingCost);
-                        setChanged();
+                    int ATTEMPTING_TANK_AMOUNT = CURR_TANK_AMOUNT + checkMBAmount(inputItems.getStackInSlot(i));
+                    if(ATTEMPTING_TANK_AMOUNT < MAX_TANK_AMOUNT){
+                        checkMeltingProgress(i, "gold",stack);
                     }
                 }
                 else if(diamondRecipes.contains(inputItems.getStackInSlot(i).getItem())){
-                    if(CURR_TANK_AMOUNT < MAX_TANK_AMOUNT){
-                        convertToMB(inputItems.getStackInSlot(i), "diamond");
-                        stack.setCount(stack.getCount() - 1);
-                        energy.consumeEnergy(meltingCost);
-                        setChanged();
+                    int ATTEMPTING_TANK_AMOUNT = CURR_TANK_AMOUNT + checkMBAmount(inputItems.getStackInSlot(i));
+                    if(ATTEMPTING_TANK_AMOUNT < MAX_TANK_AMOUNT){
+                        checkMeltingProgress(i, "diamond",stack);
                     }
                 }
                 else if(inputItems.getStackInSlot(i).is(Tags.Items.ORES)){
-                    if(CURR_TANK_AMOUNT < MAX_TANK_AMOUNT){
-                        convertToMB(inputItems.getStackInSlot(i), "ores");
-                        stack.setCount(stack.getCount() - 1);
-                        energy.consumeEnergy(meltingCost);
-                        setChanged();
+                    int ATTEMPTING_TANK_AMOUNT = CURR_TANK_AMOUNT + checkMBAmount(inputItems.getStackInSlot(i));
+                    if(ATTEMPTING_TANK_AMOUNT < MAX_TANK_AMOUNT){
+                        checkMeltingProgress(i, "ores",stack);
                     }
                 }
                 else if(inputItems.getStackInSlot(i).is(Tags.Items.INGOTS)){
-                    if(CURR_TANK_AMOUNT < MAX_TANK_AMOUNT){
-                        convertToMB(inputItems.getStackInSlot(i), "ingot");
-                        stack.setCount(stack.getCount() - 1);
-                        energy.consumeEnergy(meltingCost);
-                        setChanged();
+                    int ATTEMPTING_TANK_AMOUNT = CURR_TANK_AMOUNT + checkMBAmount(inputItems.getStackInSlot(i));
+                    if(ATTEMPTING_TANK_AMOUNT < MAX_TANK_AMOUNT){
+                        checkMeltingProgress(i, "ingot",stack);
                     }
                 }
                 else{
@@ -334,24 +325,114 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
                 }
                 break;
             case 14:
+                if(cookingTimeSlot14 == melttime){
+                    cookingTimeSlot14 = 0;
+                    convertToMB(inputItems.getStackInSlot(14), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot14++;
+                }
                 break;
             case 15:
+                if(cookingTimeSlot15 == melttime){
+                    cookingTimeSlot15 = 0;
+                    convertToMB(inputItems.getStackInSlot(15), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot15++;
+                }
                 break;
             case 16:
+                if(cookingTimeSlot16 == melttime){
+                    cookingTimeSlot16 = 0;
+                    convertToMB(inputItems.getStackInSlot(16), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot16++;
+                }
                 break;
             case 17:
+                if(cookingTimeSlot17 == melttime){
+                    cookingTimeSlot17 = 0;
+                    convertToMB(inputItems.getStackInSlot(17), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot17++;
+                }
                 break;
             case 18:
+                if(cookingTimeSlot18 == melttime){
+                    cookingTimeSlot18 = 0;
+                    convertToMB(inputItems.getStackInSlot(18), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot18++;
+                }
                 break;
             case 19:
+                if(cookingTimeSlot19 == melttime){
+                    cookingTimeSlot19 = 0;
+                    convertToMB(inputItems.getStackInSlot(19), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot19++;
+                }
                 break;
             case 20:
+                if(cookingTimeSlot20 == melttime){
+                    cookingTimeSlot20 = 0;
+                    convertToMB(inputItems.getStackInSlot(20), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot20++;
+                }
                 break;
             case 21:
+                if(cookingTimeSlot21 == melttime){
+                    cookingTimeSlot21 = 0;
+                    convertToMB(inputItems.getStackInSlot(21), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot21++;
+                }
                 break;
             case 22:
+                if(cookingTimeSlot22 == melttime){
+                    cookingTimeSlot22 = 0;
+                    convertToMB(inputItems.getStackInSlot(22), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot22++;
+                }
                 break;
             case 23:
+                if(cookingTimeSlot23 == melttime){
+                    cookingTimeSlot23 = 0;
+                    convertToMB(inputItems.getStackInSlot(23), material);
+                    stack.setCount(stack.getCount() -1);
+                    energy.consumeEnergy(meltingCost);
+                    setChanged();
+                }else{
+                    cookingTimeSlot23++;
+                }
                 break;
             case 24:
                 break;
@@ -367,33 +448,172 @@ public class SmelteryControllerBlockEntity extends BlockEntity {
     private void convertToMB(ItemStack stackInSlot, String iron) {
         switch (iron){
             case "iron":
-                if(stackInSlot.is(Items.IRON_NUGGET)){
+                if(stackInSlot.is(Tags.Items.NUGGETS)){
                     ironAmount += 2;
-                }else{
+                }
+                else if(stackInSlot.is(Tags.Items.INGOTS))
+                {
+                    ironAmount += 18;
+                }
+                else if(stackInSlot.is(Tags.Items.ORES_IRON)){
                     ironAmount += 36;
+                }
+                else if(stackInSlot.is(Items.IRON_BLOCK)){
+                    ironAmount += 162;
+                }
+                else if(stackInSlot.is(Items.IRON_AXE)){
+                    ironAmount += 54;
+                }
+                else if(stackInSlot.is(Items.IRON_BARS)){
+                    ironAmount += 108;
+                }
+                else if(stackInSlot.is(Items.IRON_BOOTS)){
+                    ironAmount += 72;
+                }
+                else if(stackInSlot.is(Items.IRON_CHESTPLATE)){
+                    ironAmount += 144;
+                }
+                else if(stackInSlot.is(Items.IRON_DOOR)){
+                    ironAmount += 108;
+                }
+                else if(stackInSlot.is(Items.IRON_HELMET)){
+                    ironAmount += 90;
+                }
+                else if(stackInSlot.is(Items.IRON_HOE)){
+                    ironAmount += 36;
+                }
+                else if(stackInSlot.is(Items.IRON_HORSE_ARMOR)){
+                    ironAmount += 108;
+                }
+                else if(stackInSlot.is(Items.IRON_LEGGINGS)){
+                    ironAmount += 126;
+                }
+                else if(stackInSlot.is(Items.IRON_PICKAXE)){
+                    ironAmount += 54;
+                }
+                else if(stackInSlot.is(Items.IRON_SHOVEL)){
+                    ironAmount += 18;
+                }
+                else if(stackInSlot.is(Items.IRON_SWORD)){
+                    ironAmount += 36;
+                }
+                else if(stackInSlot.is(Items.IRON_TRAPDOOR)){
+                    ironAmount += 72;
+                }
+                else{
+                    ironAmount += 2;
                 }
                 break;
             case "gold":
-                if(stackInSlot.is(Items.GOLD_NUGGET)){
+                if(stackInSlot.is(Tags.Items.NUGGETS)){
                     goldAmount += 2;
-                }else{
+                }
+                else if(stackInSlot.is(Tags.Items.INGOTS)){
+                    goldAmount += 18;
+                }
+                else if(stackInSlot.is(Tags.Items.ORES)){
                     goldAmount += 36;
+                }
+                else if(stackInSlot.is(Items.GOLD_BLOCK)){
+                    goldAmount += 162;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_APPLE)){
+                    goldAmount += 144;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_AXE)){
+                    goldAmount += 54;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_BOOTS)){
+                    goldAmount += 72;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_CARROT)){
+                    goldAmount += 144;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_CHESTPLATE)){
+                    goldAmount += 144;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_HELMET)){
+                    goldAmount += 90;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_HOE)){
+                    goldAmount += 36;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_HORSE_ARMOR)){
+                    goldAmount += 108;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_LEGGINGS)){
+                    goldAmount += 126;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_PICKAXE)){
+                    goldAmount += 54;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_SHOVEL)){
+                    goldAmount += 18;
+                }
+                else if(stackInSlot.is(Items.GOLDEN_SWORD)){
+                    goldAmount += 36;
+                }
+                else if(stackInSlot.is(Items.ENCHANTED_GOLDEN_APPLE)){
+                    goldAmount += 144;
+                }
+                else{
+                    goldAmount += 2;
                 }
                 break;
             case "diamond":
-                if(stackInSlot.is(Items.DIAMOND)){
-                    diamondAmount += 18;
-                }else{
+                if(stackInSlot.is(Tags.Items.ORES)){
                     diamondAmount += 36;
+                }
+                else if(stackInSlot.is(Tags.Items.NUGGETS)){
+                    diamondAmount += 2;
+                }
+                else if(stackInSlot.is(Tags.Items.GEMS)){
+                    diamondAmount += 8;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_BLOCK)){
+                    diamondAmount += 162;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_AXE)){
+                    diamondAmount += 54;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_BOOTS)){
+                    diamondAmount += 72;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_CHESTPLATE)){
+                    diamondAmount += 144;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_HELMET)){
+                    diamondAmount += 40;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_HOE)){
+                    diamondAmount += 36;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_HORSE_ARMOR)){
+                    diamondAmount += 108;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_LEGGINGS)){
+                    diamondAmount += 126;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_PICKAXE)){
+                    diamondAmount += 54;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_SHOVEL)){
+                    diamondAmount += 18;
+                }
+                else if(stackInSlot.is(Items.DIAMOND_SWORD)){
+                    diamondAmount += 36;
+                }
+                else{
+                    diamondAmount += 2;
                 }
                 break;
             case "ores":
-                if(stackInSlot.is(Items.IRON_ORE)){
-                    ironAmount += 162;
-                }else if(stackInSlot.is(Items.GOLD_ORE)){
-                    goldAmount += 162;
-                }else if(stackInSlot.is(Items.DIAMOND_ORE)){
-                    diamondAmount += 162;
+                if(stackInSlot.is(Tags.Items.ORES_IRON)){
+                    ironAmount += 36;
+                }else if(stackInSlot.is(Tags.Items.ORES_GOLD)){
+                    goldAmount += 36;
+                }else if(stackInSlot.is(Tags.Items.ORES_DIAMOND)){
+                    diamondAmount += 36;
                 }else{
 
                 }
